@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent } from "@ngcommerce/core";
+import { HttpModule } from "@angular/http";
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -20,11 +22,15 @@ import { ProfilePage } from '../pages/profile/profile';
     CartPage,
     SearchPage,
     ProfilePage,
-    TabnavPage
+    TabnavPage,
+    IonIconSearchbarComponent,
+    IonListGridComponent
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    EcommerceCoreModule.forRoot('https://greenvintage-v2.herokuapp.com/api/')
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,7 +45,7 @@ import { ProfilePage } from '../pages/profile/profile';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }
