@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Http, Response } from "@angular/http";
 import { CartModel } from "@ngcommerce/core";
 
 /**
@@ -63,7 +62,7 @@ export class CartPage {
     "discount": 20,
     "totalamount": 280
   } as CartModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
