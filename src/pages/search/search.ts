@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { CorService, ProductListModel, ProductService } from "@ngcommerce/core";
+import { Http } from '@angular/http';
 /**
  * Generated class for the SearchPage page.
  *
@@ -14,12 +15,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'search.html',
 })
 export class SearchPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  product = {} as ProductListModel;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public http: Http) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
+    this.getListProduct();
+  }
+  getListProduct(){
+     this.productService.getProductList().then((data) => {
+      this.product = data;
+      console.log(data);
+    },(error) => {
+      console.error(error);
+    });
   }
 
 }
