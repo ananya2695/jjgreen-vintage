@@ -18,5 +18,10 @@
     <div text-center>
         <span class="icon-green-text"></span>
     </div>
-    <ion-list-grid [items]="product.items"></ion-list-grid>
+    <ion-slides pager class="margin-top-100">
+        <ion-slide>
+            <h4>High-Ligh</h4>
+            <ion-list-grid [items]="product.items"></ion-list-grid>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

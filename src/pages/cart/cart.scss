@@ -1,7 +1,14 @@
 page-cart {
-
-    .count{
+    .count {
         margin: 10px !important;
     }
-
+    .price-gray {
+        color: gray !important;
+    }
+    .price-red {
+        color:red !important;
+    }
+    .text-decoration {
+        text-decoration: line-through !important;
+    }
 }
