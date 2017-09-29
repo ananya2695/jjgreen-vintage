@@ -1,5 +1,31 @@
 page-home {
     .font-jjgreen {
-        margin-bottom: -86px
+        margin-bottom: -100px
+    }
+    .item-ios {
+        padding-left: 16px;
+        border-radius: 0;
+        position: relative;
+        font-size: 1.7rem;
+        color: #000;
+        background-color: #fff0d1;
+        -webkit-transition: background-color 200ms linear;
+        transition: background-color 200ms linear;
+    }
+    .item-md {
+        padding-left: 16px;
+        border-radius: 0;
+        position: relative;
+        font-size: 1.7rem;
+        color: #000;
+        background-color: #fff0d1;
+        -webkit-transition: background-color 200ms linear;
+        transition: background-color 200ms linear;
+    }
+    .toolbar .searchbar-ios .searchbar-input {
+        background: #d8625d;
+    }
+    .toolbar .searchbar-md .searchbar-input {
+        background: #d8625d;
     }
 }
