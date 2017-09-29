@@ -16,7 +16,12 @@
 <ion-content>
     <img class="font-jjgreen" src="./assets/image/WDS2.jpg">
     <div text-center>
-        <span class="green-vintage-logo"></span>
+        <span class="icon-green-text"></span>
     </div>
-    <ion-list-grid [items]="product.items"></ion-list-grid>
+    <ion-slides pager>
+        <ion-slide>
+            <h2>High-Ligh</h2>
+            <ion-list-grid [items]="product.items"></ion-list-grid>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

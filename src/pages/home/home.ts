@@ -26,17 +26,13 @@ export class HomePage {
     this.getListProduct();
   }
   getListProduct(){
-    this.http.get('https://greenvintage-v2.herokuapp.com/api/products/')
-    .map(res => res.json())
-    .subscribe(data=>{
+   this.productService.getProductList().then((data) => {
+      this.product = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
       console.log(data);
-    })
-    // this.productService.getProductList().then((data) => {
-    //   this.product = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
-    //   console.log(data);
-    // },(error) => {
-    //   console.error(error);
-    // });
+    },(error) => {
+      console.error(error);
+    });
+    
   }
 
 }
