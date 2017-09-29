@@ -14,10 +14,10 @@
 
 
 <ion-content>
- <ion-list-cart></ion-list-cart> 
+ <ion-list-cart *ngIf="cart.items" [items]="cart.items" (returnItems)="returnItems($event)"></ion-list-cart> 
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="cart.items">
   <ion-toolbar>
     <div >
       <ion-row class="categories-title">
@@ -27,9 +27,9 @@
           <p class="color-black-custom font-bold">รวมสุทธิโดยประมาณ</p>
         </ion-col>
         <ion-col col-5 text-right>
-          <p class="color-black-custom font-bold">1</p>
-          <p class="color-black-custom font-bold">2</p>
-          <p class="color-black-custom font-bold">3</p>
+          <p class="color-black-custom font-bold">{{cart.amount}}</p>
+          <p class="color-black-custom font-bold">{{cart.discount}}</p>
+          <p class="color-black-custom font-bold">{{cart.totalamount}}</p>
         </ion-col>
       </ion-row>
       <button ion-button full color="danger">ดำเนินการต่อ</button>
