@@ -27,6 +27,7 @@ export class LoginPage {
       this.user = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
       console.log(data);
       window.localStorage.setItem('jjuser',JSON.stringify(data));
+      this.navCtrl.push("HomePage");
     }, (error) => {
       console.error(error);
     });
