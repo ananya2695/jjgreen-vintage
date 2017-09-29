@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { CorService, ProductListModel, ProductService } from "@ngcommerce/core";
 import { Http } from '@angular/http';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the HomePage page.
@@ -18,21 +19,39 @@ import { Http } from '@angular/http';
 export class HomePage {
   product = {} as ProductListModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public productService: ProductService, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public http: Http, public modalCtrl: ModalController) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad HomePage');
-    this.getListProduct();
+    if(!this.getUser()){
+      this.presentLoginModal();
+    }
+    this.getListProduct();    
   }
-  getListProduct(){
-   this.productService.getProductList().then((data) => {
+
+  getUser(){
+    return JSON.parse(window.localStorage.getItem('jjuser'));
+  }
+
+  presentLoginModal() {
+    let profileModal = this.modalCtrl.create(LoginPage);
+    profileModal.present();
+  }
+
+  getListProduct() {
+    this.productService.getProductList().then((data) => {
       this.product = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
       console.log(data);
-    },(error) => {
+    }, (error) => {
+      let err = JSON.parse(error._body);
+      console.log(err);
+      if(err.message === 'Token is incorrect or has expired. Please login again'){
+        this.presentLoginModal();
+      }
       console.error(error);
     });
-    
+
   }
 
 }

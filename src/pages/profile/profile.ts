@@ -23,4 +23,9 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
+  logout(e){
+    window.localStorage.removeItem('jjuser');
+    this.userProfile = JSON.parse(window.localStorage.getItem('jjuser'));
+  }
+
 }
