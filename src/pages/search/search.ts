@@ -24,11 +24,12 @@ export class SearchPage {
     this.getListProduct();
   }
   getListProduct(){
-    this.http.get('https://greenvintage-v2.herokuapp.com/api/products/')
-    .map(res => res.json())
-    .subscribe(data=>{
+     this.productService.getProductList().then((data) => {
+      this.product = data;
       console.log(data);
-    })
+    },(error) => {
+      console.error(error);
+    });
   }
 
 }
