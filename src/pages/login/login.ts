@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CorService, UserModel, AuthenService } from "@ngcommerce/core";
+import { TabnavPage } from '../tabnav/tabnav';
+
 
 /**
  * Generated class for the LoginPage page.
@@ -27,7 +29,7 @@ export class LoginPage {
       this.user = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
       console.log(data);
       window.localStorage.setItem('jjuser',JSON.stringify(data));
-      this.navCtrl.push("HomePage");
+      this.navCtrl.push(TabnavPage);
     }, (error) => {
       console.error(error);
     });
