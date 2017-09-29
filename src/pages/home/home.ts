@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CorService, ProductListModel, ProductService } from "@ngcommerce/core";
+import { Http } from '@angular/http';
 
 /**
  * Generated class for the HomePage page.
@@ -17,7 +18,7 @@ import { CorService, ProductListModel, ProductService } from "@ngcommerce/core";
 export class HomePage {
   product = {} as ProductListModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public productService: ProductService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  public productService: ProductService, public http: Http) {
   }
 
   ionViewDidLoad() {
@@ -25,12 +26,17 @@ export class HomePage {
     this.getListProduct();
   }
   getListProduct(){
-    this.productService.getProductList().then((data) => {
-      this.product = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
+    this.http.get('https://greenvintage-v2.herokuapp.com/api/products/')
+    .map(res => res.json())
+    .subscribe(data=>{
       console.log(data);
-    },(error) => {
-      console.error(error);
-    });
+    })
+    // this.productService.getProductList().then((data) => {
+    //   this.product = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
+    //   console.log(data);
+    // },(error) => {
+    //   console.error(error);
+    // });
   }
 
 }

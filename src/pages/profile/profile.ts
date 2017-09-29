@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { CorService, UserModel, AuthenService } from "@ngcommerce/core";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -14,8 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userProfile = {} as UserModel;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authenService: AuthenService) {
+    this.userProfile = JSON.parse(window.localStorage.getItem('jjuser'));
   }
 
   ionViewDidLoad() {
