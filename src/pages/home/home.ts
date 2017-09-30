@@ -24,19 +24,26 @@ export class HomePage {
 
   ionViewWillEnter() {
     console.log('ionViewDidLoad HomePage');
-    if(!this.getUser()){
+    let user = this.getUser();
+    if (!user) {
       this.presentLoginModal();
+    } else {
+      this.getListProduct();
     }
-    this.getListProduct();    
   }
 
-  getUser(){
+  getUser() {
     return JSON.parse(window.localStorage.getItem('jjuser'));
   }
 
   presentLoginModal() {
     let profileModal = this.modalCtrl.create(LoginPage);
     profileModal.present();
+
+    profileModal.onDidDismiss(() => {
+      console.log('MODAL DATA');
+      this.ionViewWillEnter();
+    });
   }
 
   getListProduct() {
@@ -46,10 +53,11 @@ export class HomePage {
     }, (error) => {
       let err = JSON.parse(error._body);
       console.log(err);
-      if(err.message === 'Token is incorrect or has expired. Please login again'){
+      if (err.message === 'Token is incorrect or has expired. Please login again') {
+        window.localStorage.clear();
         this.presentLoginModal();
       }
-      console.error(error);
+      console.log(error);
     });
 
   }
