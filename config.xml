@@ -88,4 +88,5 @@
         <variable name="APP_NAME" value="G-Vintage" />
     </plugin>
     <engine name="android" spec="~6.2.3" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.2.1" />
 </widget>
