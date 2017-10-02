@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, LoadingController 
 import { CorService, UserModel, AuthenService } from "@ngcommerce/core";
 import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterPage } from '../register/register';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 
 /**
@@ -24,7 +25,8 @@ export class LoginPage {
     public navParams: NavParams,
     public authenService: AuthenService,
     public viewCtrl: ViewController,
-    public loading: LoadingController
+    public loading: LoadingController,
+    private fb: Facebook
   ) {
   }
 
@@ -52,23 +54,23 @@ export class LoginPage {
   }
 
   loginFb() {
-    // this.fb.login(['public_profile', 'user_friends', 'email'])
-    //   .then((res: FacebookLoginResponse) => {
-    //     console.log('Logged into Facebook!', res);
-    //     // this.facebookRes = JSON.stringify(res);
-    //     this.fb.api('me?fields=email,id,name,gender', null).then((user: FacebookLoginResponse) => {
-    //       this.navCtrl.push(RegisterPage, user);
-    //     })
-    //       .catch(e => {
-    //         alert(JSON.stringify(e));
-    //       })
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => {
+        console.log('Logged into Facebook!', res);
+        // this.facebookRes = JSON.stringify(res);
+        this.fb.api('me?fields=email,id,name,gender', null).then((user: FacebookLoginResponse) => {
+          this.navCtrl.push(RegisterPage, user);
+        })
+          .catch(e => {
+            alert(JSON.stringify(e));
+          })
 
-    //   })
+      })
 
-    //   .catch(e => console.log('Error logging into Facebook', e));
+      .catch(e => alert('Error logging into Facebook '+ JSON.stringify(e)));
 
 
-    // this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
   }
 
 }
