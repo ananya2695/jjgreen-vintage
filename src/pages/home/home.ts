@@ -35,7 +35,7 @@ export class HomePage {
       let err = JSON.parse(error._body);
       console.log(err);
       if (err.message === 'Token is incorrect or has expired. Please login again') {
-        window.localStorage.clear();
+        window.localStorage.removeItem('jjuser');
         this.app.getRootNav().setRoot(LoginPage);
       }
       console.log(error);
