@@ -31,4 +31,13 @@ page-home {
     .margin-top-100 {
         margin-top: -100px;
     }
+
+    p{
+        white-space: nowrap; 
+        width: 9em; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    
+        color: #000
+         }
 }
