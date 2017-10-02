@@ -24,3 +24,12 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+### With the Plugin:
+
+$ ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
+$ npm install --save @ionic-native/facebook
+
+$ ionic cordova plugin add onesignal-cordova-plugin
+$ npm install --save @ionic-native/onesignal
+
+
