@@ -15,6 +15,7 @@ import { SearchPage } from '../pages/search/search';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from "../pages/login/login";
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { ProductDetailPage } from '../pages/product-detail/product-detail';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     IonFormProfileComponent,
     IonListCartComponent,
     IonListProductComponent,
-    LoginPage
+    LoginPage,
+    ProductDetailPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SearchPage,
     ProfilePage,
     TabnavPage,
-    LoginPage
+    LoginPage,
+    ProductDetailPage
   ],
   providers: [
     StatusBar,
