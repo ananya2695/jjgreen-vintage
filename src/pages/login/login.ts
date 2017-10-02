@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
-import { CorService, UserModel, AuthenService } from "@ngcommerce/core";
+import { UserModel, AuthenService } from "@ngcommerce/core";
 import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterPage } from '../register/register';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
@@ -58,7 +58,7 @@ export class LoginPage {
       .then((res: FacebookLoginResponse) => {
         console.log('Logged into Facebook!', res);
         // this.facebookRes = JSON.stringify(res);
-        this.fb.api('me?fields=email,id,name,gender', null).then((user: FacebookLoginResponse) => {
+        this.fb.api('me?fields=id,last_name,first_name,picture,email', null).then((user: FacebookLoginResponse) => {
           this.navCtrl.push(RegisterPage, user);
         })
           .catch(e => {
