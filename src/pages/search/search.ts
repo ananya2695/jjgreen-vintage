@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CorService, ProductListModel, ProductService } from "@ngcommerce/core";
 import { Http } from '@angular/http';
+import { ProductDetailPage } from '../product-detail/product-detail';
 /**
  * Generated class for the SearchPage page.
  *
@@ -30,6 +31,9 @@ export class SearchPage {
     },(error) => {
       console.error(error);
     });
+  }
+  selectedProduct(item){
+    this.navCtrl.push(ProductDetailPage,item);
   }
 
 }

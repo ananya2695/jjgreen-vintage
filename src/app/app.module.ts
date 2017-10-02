@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent} from "@ngcommerce/core";
+import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent,IonDetailProductComponent} from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
 
 import { MyApp } from './app.component';
@@ -32,7 +32,8 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
     IonListCartComponent,
     IonListProductComponent,
     LoginPage,
-    ProductDetailPage
+    ProductDetailPage,
+    IonDetailProductComponent
   ],
   imports: [
     BrowserModule,
