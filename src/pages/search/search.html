@@ -14,5 +14,5 @@
 
 
 <ion-content >
-  <ion-list-product [items]="product.items"></ion-list-product>
+  <ion-list-product [items]="product.items" (selectedProduct)="selectedProduct($event)"></ion-list-product>
 </ion-content>

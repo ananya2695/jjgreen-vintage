@@ -14,5 +14,5 @@
 
 
 <ion-content>
-  <ion-list-product [items]="favorite.items"></ion-list-product>
+  <ion-list-product [items]="favorite.items" (selectedProduct)="selectedProduct($event)"></ion-list-product>
 </ion-content>
