@@ -3,15 +3,13 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
 import { TabnavPage } from "../pages/tabnav/tabnav";
 import { LoginPage } from "../pages/login/login";
-import { ProfilePage } from '../pages/profile/profile';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabnavPage;
+  rootPage: any = TabnavPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -20,6 +18,16 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    
+    this.getUser();
+  }
+
+  getUser(){
+    let user = window.localStorage.getItem('jjuser');
+
+    if(!user){
+      this.rootPage = LoginPage;
+    }
   }
 }
 

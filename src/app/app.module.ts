@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent} from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
+import { Facebook } from '@ionic-native/facebook';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -15,6 +16,7 @@ import { SearchPage } from '../pages/search/search';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from "../pages/login/login";
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SearchPage,
     ProfilePage,
     TabnavPage,
+    LoginPage,
+    RegisterPage,
+
     IonIconSearchbarComponent,
     IonListGridComponent,
     IonFormProfileComponent,
     IonListCartComponent,
-    IonListProductComponent,
-    LoginPage
+    IonListProductComponent
   ],
   imports: [
     BrowserModule,
@@ -48,11 +52,13 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SearchPage,
     ProfilePage,
     TabnavPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Facebook,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

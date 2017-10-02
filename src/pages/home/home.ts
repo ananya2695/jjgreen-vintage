@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { CorService, ProductListModel, ProductService } from "@ngcommerce/core";
+import { IonicPage, App, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ProductListModel, ProductService } from "@ngcommerce/core";
 import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
 
@@ -19,31 +19,12 @@ import { LoginPage } from '../login/login';
 export class HomePage {
   product = {} as ProductListModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public http: Http, public modalCtrl: ModalController) {
+  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public http: Http, public modalCtrl: ModalController) {
   }
 
   ionViewWillEnter() {
     console.log('ionViewDidLoad HomePage');
-    let user = this.getUser();
-    if (!user) {
-      this.presentLoginModal();
-    } else {
-      this.getListProduct();
-    }
-  }
-
-  getUser() {
-    return JSON.parse(window.localStorage.getItem('jjuser'));
-  }
-
-  presentLoginModal() {
-    let profileModal = this.modalCtrl.create(LoginPage);
-    profileModal.present();
-
-    profileModal.onDidDismiss(() => {
-      console.log('MODAL DATA');
-      this.ionViewWillEnter();
-    });
+    this.getListProduct();
   }
 
   getListProduct() {
@@ -55,7 +36,7 @@ export class HomePage {
       console.log(err);
       if (err.message === 'Token is incorrect or has expired. Please login again') {
         window.localStorage.clear();
-        this.presentLoginModal();
+        this.app.getRootNav().setRoot(LoginPage);
       }
       console.log(error);
     });
