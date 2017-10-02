@@ -67,7 +67,7 @@ export class LoginPage {
 
       })
 
-      .catch(e => console.log('Error logging into Facebook', e));
+      .catch(e => alert('Error logging into Facebook '+ JSON.stringify(e)));
 
 
     this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);

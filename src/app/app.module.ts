@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent} from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
+import { OneSignal } from '@ionic-native/onesignal';
 import { Facebook } from '@ionic-native/facebook';
 
 import { MyApp } from './app.component';
@@ -58,6 +59,7 @@ import { RegisterPage } from '../pages/register/register';
   providers: [
     StatusBar,
     SplashScreen,
+    OneSignal,
     Facebook,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

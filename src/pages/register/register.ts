@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { SignupModel } from "@ngcommerce/core";
 import { TabnavPage } from '../tabnav/tabnav';
 import { UserModel, AuthenService } from "@ngcommerce/core";
@@ -20,9 +20,13 @@ export class RegisterPage {
 
   signup = {} as SignupModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authenService: AuthenService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public authenService: AuthenService,
+    public loading: LoadingController) {
 
-    if (this.navParams.data) {
+    if (this.navParams.data.first_name) {
       this.signup.firstName = this.navParams.data.first_name;
       this.signup.lastName = this.navParams.data.last_name;
       this.signup.email = this.navParams.data.email;
@@ -35,10 +39,14 @@ export class RegisterPage {
   }
 
   onRegister() {
+    let loading = this.loading.create();
+    loading.present();
     this.authenService.signUp(this.signup).then((data) => {
-      window.localStorage.setItem('jjuser', JSON.stringify(data));      
+      window.localStorage.setItem('jjuser', JSON.stringify(data));
       this.navCtrl.push(TabnavPage);
+      loading.dismiss();      
     }, (error) => {
+      loading.dismiss();      
       alert(JSON.parse(error._body).message);
     });
   }
