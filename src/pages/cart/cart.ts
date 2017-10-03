@@ -40,15 +40,16 @@ export class CartPage {
   }
 
   ionViewWillLeave() {
-    let cartStorage = this.cartService.getCartStorage();
+    this.cart = this.cartService.getCartStorage();
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
 
-    console.log(cartStorage);
+    console.log(this.cart);
     if (user) {
-      if (cartStorage && cartStorage._id) {
-        this.updateCart(cartStorage);
+      this.onCalculate();
+      if (this.cart && this.cart._id) {
+        this.updateCart(this.cart);
       } else {
-        this.createCart(cartStorage);
+        this.createCart(this.cart);
       }
     }
   }
