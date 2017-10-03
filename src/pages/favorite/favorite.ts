@@ -20,8 +20,8 @@ export class FavoritePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public favoriteService: FavoriteService, public http: Http, public productService: ProductService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FavoritePage');
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter FavoritePage');
     this.getListFavorite();
     //this.getListProduct();
   }
