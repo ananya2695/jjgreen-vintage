@@ -27,19 +27,27 @@ export class CartPage {
 
   ionViewWillEnter() {
     let cartStorage = this.cartService.getCartStorage();
-    if (cartStorage && cartStorage.items && cartStorage.items.length > 0) {
+    if (cartStorage) {
+      if (cartStorage.items && cartStorage.items.length > 0) {
         this.cart = cartStorage;
         this.onCalculate();
+      }
+    } else {
+      this.cart.items = [];
     }
   }
 
   ionViewWillLeave() {
     let cartStorage = this.cartService.getCartStorage();
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+
     console.log(cartStorage);
-    if (cartStorage._id) {
-      this.updateCart(cartStorage);
-    } else {
-      this.createCart(cartStorage);
+    if (user) {
+      if (cartStorage && cartStorage._id) {
+        this.updateCart(cartStorage);
+      } else {
+        this.createCart(cartStorage);
+      }
     }
   }
 
