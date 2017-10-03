@@ -16,3 +16,6 @@
 <ion-content>
   <ion-detail-product *ngIf="product && product.promotionprice && product.promotionprice !== undefind" [item]="product" (selectedFavorite)="selectedFavorite($event)"></ion-detail-product>
 </ion-content>
+<ion-footer>
+  <button ion-button block color="danger">Add Cart</button>
+</ion-footer>
