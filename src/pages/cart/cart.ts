@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CartModel } from "@ngcommerce/core";
+import { CheckoutPage } from './../checkout/checkout';
+
 
 /**
  * Generated class for the CartPage page.
@@ -92,7 +94,7 @@ export class CartPage {
 
   }
   gotocheckout() {
-    this.navCtrl.push('CheckoutPage')
+    this.navCtrl.push(CheckoutPage)
   }
 
 }

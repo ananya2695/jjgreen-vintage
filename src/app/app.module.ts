@@ -3,7 +3,24 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent,IonDetailProductComponent} from "@ngcommerce/core";
+import {
+  EcommerceCoreModule,
+  IonIconSearchbarComponent,
+  IonListGridComponent,
+  IonFormProfileComponent,
+  IonListCartComponent,
+  IonListProductComponent,
+  IonDetailProductComponent,
+  IonFormWizardComponent,
+  IonFormWizardStepComponent,
+  IonFormShippingComponent,
+  IonFormPaymentComponent,
+  IonFormConfirmComponent,
+  IonFormPaymentOptionComponent,
+  IonFormCreditComponent,
+  IonFormDeliveryComponent,
+  IonFormCounterserviceComponent
+} from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
 import { OneSignal } from '@ionic-native/onesignal';
 import { Facebook } from '@ionic-native/facebook';
@@ -19,6 +36,8 @@ import { LoginPage } from "../pages/login/login";
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { RegisterPage } from '../pages/register/register';
+import { CheckoutPage } from '../pages/checkout/checkout';
+import { FormAddressPage } from '../pages/form-address/form-address';
 
 @NgModule({
   declarations: [
@@ -31,6 +50,8 @@ import { RegisterPage } from '../pages/register/register';
     TabnavPage,
     LoginPage,
     RegisterPage,
+    CheckoutPage,
+    FormAddressPage,
 
     IonIconSearchbarComponent,
     IonListGridComponent,
@@ -39,7 +60,16 @@ import { RegisterPage } from '../pages/register/register';
     IonListProductComponent,
     LoginPage,
     ProductDetailPage,
-    IonDetailProductComponent
+    IonDetailProductComponent,
+    IonFormWizardComponent,
+    IonFormWizardStepComponent,
+    IonFormShippingComponent,
+    IonFormPaymentComponent,
+    IonFormConfirmComponent,
+    IonFormPaymentOptionComponent,
+    IonFormCreditComponent,
+    IonFormDeliveryComponent,
+    IonFormCounterserviceComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +89,9 @@ import { RegisterPage } from '../pages/register/register';
     TabnavPage,
     LoginPage,
     ProductDetailPage,
-    RegisterPage
+    RegisterPage,
+    CheckoutPage,
+    FormAddressPage
   ],
   providers: [
     StatusBar,
