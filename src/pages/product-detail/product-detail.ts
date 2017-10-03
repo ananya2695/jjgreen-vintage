@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProductModel, ProductService, FavoriteService } from "@ngcommerce/core";
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { ProductModel, ProductService, FavoriteService, CartService } from "@ngcommerce/core";
+import { CartPage } from '../cart/cart';
 
 
 /**
@@ -17,7 +18,14 @@ import { ProductModel, ProductService, FavoriteService } from "@ngcommerce/core"
 })
 export class ProductDetailPage {
   product = {} as ProductModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public favoriteService: FavoriteService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public productService: ProductService,
+    public favoriteService: FavoriteService,
+    public cartService: CartService,
+    public loading: LoadingController
+  ) {
     // this.product = this.navParams.data;
     this.productService.getProductByID(this.navParams.data._id)
       .then(data => {
@@ -30,8 +38,17 @@ export class ProductDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductDetailPage');
   }
+
   selectedFavorite(product) {
     product.image = product.images[0];
     this.favoriteService.addFavorite(product);
+  }
+
+  addToCart(product) {
+    let loading = this.loading.create();
+    loading.present();
+    this.cartService.addToCart(product);
+    this.navCtrl.push(CartPage);
+    loading.dismiss();
   }
 }
