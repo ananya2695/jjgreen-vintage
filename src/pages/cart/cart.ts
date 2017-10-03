@@ -91,5 +91,8 @@ export class CartPage {
     }
 
   }
+  gotocheckout() {
+    this.navCtrl.push('CheckoutPage')
+  }
 
 }
