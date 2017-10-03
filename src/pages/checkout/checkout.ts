@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { CheckoutModel, PaymentModel, ListAddressModel } from "@ngcommerce/core";
+import { CheckoutModel, PaymentModel, ListAddressModel, CartService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 
 
@@ -38,12 +38,34 @@ export class CheckoutPage {
     }
   ];
   currentstep: number = 1;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService) {
+  this.getShippingData();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckoutPage');
   }
+
+  getShippingData() {
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+    this.cartService.getCartByUser(user._id).then((data) => {
+      console.log(data);
+      this.shipping = data;
+      // console.log(this.shipping);
+    }, (error) => {
+      console.error(error);
+    });
+  }
+  // getAddressData() {
+  //   this.checkoutServiceProvider.getAddressData().then((data) => {
+  //     this.address = data;
+  //     this.loading.dismiss();
+  //   }, (error) => {
+  //     this.log.error(error);
+  //     this.loading.dismiss();
+  //   });
+  // }
+
   completedShippingStep(e) {
     this.datashipping = e;
     // alert('completedShippingStep');
