@@ -38,6 +38,7 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { RegisterPage } from '../pages/register/register';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { FormAddressPage } from '../pages/form-address/form-address';
+import { CompletePage } from './../pages/complete/complete';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FormAddressPage } from '../pages/form-address/form-address';
     RegisterPage,
     CheckoutPage,
     FormAddressPage,
+    CompletePage,
 
     IonIconSearchbarComponent,
     IonListGridComponent,
@@ -91,7 +93,8 @@ import { FormAddressPage } from '../pages/form-address/form-address';
     ProductDetailPage,
     RegisterPage,
     CheckoutPage,
-    FormAddressPage
+    FormAddressPage,
+    CompletePage
   ],
   providers: [
     StatusBar,

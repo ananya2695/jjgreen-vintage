@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
+import { CompletePage } from './../complete/complete';
 
 
 /**
@@ -92,7 +93,7 @@ export class CheckoutPage {
     console.log(this.dataconfirm);
     if (this.dataconfirm) {
       this.orderService.createOrder(this.dataconfirm).then((data) => {
-        // this.navCtrl.push(CompleteOrderedPage);
+        this.navCtrl.push(CompletePage);
       }, (error) => {
         console.error(error);
       });
