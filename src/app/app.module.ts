@@ -3,24 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {
-  EcommerceCoreModule,
-  IonIconSearchbarComponent,
-  IonListGridComponent,
-  IonFormProfileComponent,
-  IonListCartComponent,
-  IonListProductComponent,
-  IonDetailProductComponent,
-  IonFormWizardComponent,
-  IonFormWizardStepComponent,
-  IonFormShippingComponent,
-  IonFormPaymentComponent,
-  IonFormConfirmComponent,
-  IonFormPaymentOptionComponent,
-  IonFormCreditComponent,
-  IonFormDeliveryComponent,
-  IonFormCounterserviceComponent
-} from "@ngcommerce/core";
+import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent,IonDetailProductComponent,IonFormReviewComponent} from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
 import { OneSignal } from '@ionic-native/onesignal';
 import { Facebook } from '@ionic-native/facebook';
@@ -39,6 +22,7 @@ import { RegisterPage } from '../pages/register/register';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { FormAddressPage } from '../pages/form-address/form-address';
 import { CompletePage } from './../pages/complete/complete';
+import { WritereviewPage } from '../pages/writereview/writereview';
 
 @NgModule({
   declarations: [
@@ -54,6 +38,7 @@ import { CompletePage } from './../pages/complete/complete';
     CheckoutPage,
     FormAddressPage,
     CompletePage,
+    WritereviewPage,
 
     IonIconSearchbarComponent,
     IonListGridComponent,
@@ -63,15 +48,7 @@ import { CompletePage } from './../pages/complete/complete';
     LoginPage,
     ProductDetailPage,
     IonDetailProductComponent,
-    IonFormWizardComponent,
-    IonFormWizardStepComponent,
-    IonFormShippingComponent,
-    IonFormPaymentComponent,
-    IonFormConfirmComponent,
-    IonFormPaymentOptionComponent,
-    IonFormCreditComponent,
-    IonFormDeliveryComponent,
-    IonFormCounterserviceComponent
+    IonFormReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +71,8 @@ import { CompletePage } from './../pages/complete/complete';
     RegisterPage,
     CheckoutPage,
     FormAddressPage,
-    CompletePage
+    CompletePage,
+    WritereviewPage
   ],
   providers: [
     StatusBar,
