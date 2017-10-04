@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService } from "@ngcommerce/core";
+import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 
 
@@ -38,10 +38,10 @@ export class CheckoutPage {
     }
   ];
   currentstep: number = 1;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService, public addressService: AddressService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService, public addressService: AddressService, public paymentService: PaymentService,public orderService: OrderService) {
     this.getShippingData();
     this.getAddressData();
-    this.getPayment()
+    this.getPayment();
   }
 
   ionViewDidLoad() {
@@ -59,7 +59,6 @@ export class CheckoutPage {
     });
   }
   getAddressData() {
-    let user = JSON.parse(window.localStorage.getItem('jjuser'));
     this.addressService.getAddressByUser().then((data) => {
       this.address = data;
     }, (error) => {
@@ -68,13 +67,12 @@ export class CheckoutPage {
   }
 
   getPayment() {
-    // this.checkoutServiceProvider.getPayment().then((data) => {
-    //   this.payment = data;
-    //   console.log(this.payment);
-    //   this.log.info(this.payment);
-    // }, (err) => {
-    //   this.log.error(err);
-    // });
+    this.paymentService.getPaymentList().then((data) => {
+      this.payment = data[0];
+      console.log(this.payment);
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   completedShippingStep(e) {
@@ -92,13 +90,13 @@ export class CheckoutPage {
   completedConfirmStep(e) {
     this.dataconfirm = e;
     console.log(this.dataconfirm);
-    // if (this.dataconfirm && this.dataconfirm.order) {
-    //   this.checkoutServiceProvider.saveOrderData(this.dataconfirm).then((data) => {
-    //     this.navCtrl.push(CompleteOrderedPage);
-    //   }, (error) => {
-    //     this.log.error(error);
-    //   });
-    // }
+    if (this.dataconfirm) {
+      this.orderService.createOrder(this.dataconfirm).then((data) => {
+        // this.navCtrl.push(CompleteOrderedPage);
+      }, (error) => {
+        console.error(error);
+      });
+    }
   }
   openFormAddress(e) {
     let modal = this.modalCtrl.create(FormAddressPage);
