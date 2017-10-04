@@ -8,30 +8,51 @@ import { TabnavPage } from "../pages/tabnav/tabnav";
 import { LoginPage } from "../pages/login/login";
 import { ProfilePage } from '../pages/profile/profile';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
+
+import { CartService } from "@ngcommerce/core";
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage: any = TabnavPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private oneSignal:OneSignal) {
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    private oneSignal: OneSignal,
+    public cartService: CartService
+  ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      this.onSignalSetup();
+      // this.onSignalSetup();
     });
-    
+
     this.getUser();
   }
 
-  getUser(){
+  getUser() {
     let user = window.localStorage.getItem('jjuser');
 
-    if(!user){
+    if (!user) {
       this.rootPage = LoginPage;
+    } else {
+      this.getCartByUser();
     }
+  }
+
+  getCartByUser() {
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+
+    this.cartService.getCartByUser(user._id).then((data) => {
+      this.cartService.saveCartStorage(data);
+    }, (error) => {
+
+    });
   }
 
   onSignalSetup() {

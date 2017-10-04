@@ -27,6 +27,18 @@ export class TabnavPage {
   profileRoot = ProfilePage
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController) { }
+
+  countBadgeCart() {
+    let cart = JSON.parse(window.localStorage.getItem('gCart'));
+    let length = 0;
+    if (cart && cart.items) {
+      let cartLength = cart.items ? cart.items.length : 0;
+      for (let i = 0; i < cartLength; i++) {
+        length += cart.items[i].qty;
+      }
+    }
+    return length > 0 ? length.toString() : '';
+  }
 
 }

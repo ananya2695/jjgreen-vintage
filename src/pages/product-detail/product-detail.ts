@@ -35,6 +35,7 @@ export class ProductDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductDetailPage');
   }
+
   selectedFavorite(product) {
     product.image = product.images[0];
     this.favoriteService.addFavorite(product);

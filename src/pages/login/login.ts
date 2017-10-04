@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
-import { UserModel, AuthenService } from "@ngcommerce/core";
+import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterPage } from '../register/register';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
@@ -26,7 +26,8 @@ export class LoginPage {
     public authenService: AuthenService,
     public viewCtrl: ViewController,
     public loading: LoadingController,
-    private fb: Facebook
+    private fb: Facebook,
+    public cartService: CartService
   ) {
   }
 
@@ -41,6 +42,7 @@ export class LoginPage {
       this.user = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
+      this.getCartByUser();
       this.navCtrl.push(TabnavPage);
       loading.dismiss();
     }, (error) => {
@@ -67,10 +69,20 @@ export class LoginPage {
 
       })
 
-      .catch(e => alert('Error logging into Facebook '+ JSON.stringify(e)));
+      .catch(e => alert('Error logging into Facebook ' + JSON.stringify(e)));
 
 
     this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+  }
+
+  getCartByUser() {
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+
+    this.cartService.getCartByUser(user._id).then((data) => {
+      this.cartService.saveCartStorage(data);
+    }, (error) => {
+
+    });
   }
 
 }
