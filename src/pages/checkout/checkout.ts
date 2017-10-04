@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { CheckoutModel, PaymentModel, ListAddressModel, CartService } from "@ngcommerce/core";
+import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 
 
@@ -38,8 +38,10 @@ export class CheckoutPage {
     }
   ];
   currentstep: number = 1;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService) {
-  this.getShippingData();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService, public addressService: AddressService) {
+    this.getShippingData();
+    this.getAddressData();
+    this.getPayment()
   }
 
   ionViewDidLoad() {
@@ -56,15 +58,24 @@ export class CheckoutPage {
       console.error(error);
     });
   }
-  // getAddressData() {
-  //   this.checkoutServiceProvider.getAddressData().then((data) => {
-  //     this.address = data;
-  //     this.loading.dismiss();
-  //   }, (error) => {
-  //     this.log.error(error);
-  //     this.loading.dismiss();
-  //   });
-  // }
+  getAddressData() {
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+    this.addressService.getAddressByUser().then((data) => {
+      this.address = data;
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+  getPayment() {
+    // this.checkoutServiceProvider.getPayment().then((data) => {
+    //   this.payment = data;
+    //   console.log(this.payment);
+    //   this.log.info(this.payment);
+    // }, (err) => {
+    //   this.log.error(err);
+    // });
+  }
 
   completedShippingStep(e) {
     this.datashipping = e;
@@ -92,9 +103,9 @@ export class CheckoutPage {
   openFormAddress(e) {
     let modal = this.modalCtrl.create(FormAddressPage);
     modal.onDidDismiss(data => {
-      // this.checkoutServiceProvider.saveAddressData(data).then(resp => {
-      //   this.getAddressData();
-      // })
+      this.addressService.createAddress(data).then(resp => {
+        this.getAddressData();
+      })
       console.log(data);
 
     });
