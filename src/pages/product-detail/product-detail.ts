@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { ProductModel, ProductService, FavoriteService } from "@ngcommerce/core";
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { ProductModel, ProductService, FavoriteService, CartService } from "@ngcommerce/core";
 import { WritereviewPage } from '../writereview/writereview';
+import { CartPage } from '../cart/cart';
 
 
 /**
@@ -18,7 +19,15 @@ import { WritereviewPage } from '../writereview/writereview';
 })
 export class ProductDetailPage {
   product = {} as ProductModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public favoriteService: FavoriteService, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public productService: ProductService,
+    public favoriteService: FavoriteService,
+    public modalCtrl: ModalController,
+    public cartService: CartService,
+    public loadingCtrl: LoadingController
+  ) {
     // this.product = this.navParams.data;
     this.init();
   }
@@ -53,5 +62,13 @@ export class ProductDetailPage {
       }
     });
     reviewModal.present();
+  }
+
+  addToCart(product) {
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    this.cartService.addToCart(product);
+    this.navCtrl.push(CartPage);
+    loading.dismiss();
   }
 }
