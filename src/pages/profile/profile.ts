@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CorService, UserModel, AuthenService } from "@ngcommerce/core";
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -23,9 +24,13 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  logout(e){
+  logout(e) {
     window.localStorage.removeItem('jjuser');
     this.userProfile = JSON.parse(window.localStorage.getItem('jjuser'));
+  }
+
+  notification(e){
+    this.navCtrl.push(NotificationPage);
   }
 
 }

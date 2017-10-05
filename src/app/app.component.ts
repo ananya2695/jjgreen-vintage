@@ -29,7 +29,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      // this.onSignalSetup();
+      this.onSignalSetup();
     });
 
     this.getUser();
@@ -60,8 +60,16 @@ export class MyApp {
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
+    this.oneSignal.handleNotificationReceived().subscribe((onReceived) => {
       // do something when notification is received
+      let notifications = window.localStorage.getItem('onNotifications') ? JSON.parse(window.localStorage.getItem('onNotifications')) : [];
+
+      notifications.unshift({
+        date: new Date(),
+        message: onReceived.payload.body
+      });
+
+      window.localStorage.setItem('onNotifications', JSON.stringify(notifications));
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(() => {
