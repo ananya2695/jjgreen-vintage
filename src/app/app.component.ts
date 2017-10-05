@@ -63,10 +63,12 @@ export class MyApp {
     this.oneSignal.handleNotificationReceived().subscribe((onReceived) => {
       // do something when notification is received
       let notifications = window.localStorage.getItem('onNotifications') ? JSON.parse(window.localStorage.getItem('onNotifications')) : [];
-      notifications.push({
+
+      notifications.unshift({
         date: new Date(),
         message: onReceived.payload.body
       });
+
       window.localStorage.setItem('onNotifications', JSON.stringify(notifications));
     });
 

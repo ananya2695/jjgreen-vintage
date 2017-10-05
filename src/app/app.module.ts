@@ -23,6 +23,7 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 import { FormAddressPage } from '../pages/form-address/form-address';
 import { CompletePage } from './../pages/complete/complete';
 import { WritereviewPage } from '../pages/writereview/writereview';
+import { NotificationPage } from '../pages/notification/notification';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { WritereviewPage } from '../pages/writereview/writereview';
     LoginPage,
     ProductDetailPage,
     IonDetailProductComponent,
-    IonFormReviewComponent
+    IonFormReviewComponent,
+    NotificationPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { WritereviewPage } from '../pages/writereview/writereview';
     CheckoutPage,
     FormAddressPage,
     CompletePage,
-    WritereviewPage
+    WritereviewPage,
+    NotificationPage
   ],
   providers: [
     StatusBar,
