@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent ,IonFormProfileComponent, IonListCartComponent ,IonListProductComponent,IonDetailProductComponent,IonFormReviewComponent} from "@ngcommerce/core";
+import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent, IonFormProfileComponent, IonListCartComponent, IonListProductComponent, IonDetailProductComponent, IonFormReviewComponent, IonFormWizardComponent, IonFormWizardStepComponent, IonFormShippingComponent, IonFormPaymentComponent, IonFormConfirmComponent, IonFormPaymentOptionComponent, IonFormCreditComponent, IonFormDeliveryComponent, IonFormCounterserviceComponent } from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
 import { OneSignal } from '@ionic-native/onesignal';
 import { Facebook } from '@ionic-native/facebook';
@@ -39,7 +39,15 @@ import { WritereviewPage } from '../pages/writereview/writereview';
     FormAddressPage,
     CompletePage,
     WritereviewPage,
-
+    IonFormWizardComponent,
+    IonFormWizardStepComponent,
+    IonFormShippingComponent,
+    IonFormPaymentComponent,
+    IonFormConfirmComponent,
+    IonFormPaymentOptionComponent,
+    IonFormCreditComponent,
+    IonFormDeliveryComponent,
+    IonFormCounterserviceComponent,
     IonIconSearchbarComponent,
     IonListGridComponent,
     IonFormProfileComponent,
