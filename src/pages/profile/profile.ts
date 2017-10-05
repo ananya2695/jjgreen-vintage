@@ -23,7 +23,11 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  logout(e){
+  ionViewWillEnter(){
+    alert(JSON.parse(window.localStorage.getItem('onNotifications')));
+  }
+
+  logout(e) {
     window.localStorage.removeItem('jjuser');
     this.userProfile = JSON.parse(window.localStorage.getItem('jjuser'));
   }
