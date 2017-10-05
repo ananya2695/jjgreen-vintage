@@ -6,22 +6,32 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-icon-searchbar></ion-icon-searchbar>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-icon-searchbar></ion-icon-searchbar>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <img class="font-jjgreen" src="./assets/image/WDS2.jpg">
-    <div text-center>
-        <span class="icon-green-text"></span>
-    </div>
-    <ion-slides pager class="margin-top-100">
+  <ion-grid>
+    <ion-row no-padding>
+      <ion-col col-12>
+        <img class="font-jjgreen" src="./assets/image/WDS2.jpg">
+        <ion-row no-padding>
+          <ion-col col-12 text-center>
+            <span class="icon-green-text"></span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-slides pager class="margin-top-100">
         <ion-slide>
-            <h4>High-Light</h4>
-            <ion-list-grid [items]="product.items"></ion-list-grid>
+          <h4>High-Light</h4>
+          <ion-list-grid [items]="product.items"></ion-list-grid>
         </ion-slide>
-    </ion-slides>
+      </ion-slides>
+    </ion-row>
+  </ion-grid>
 </ion-content>
