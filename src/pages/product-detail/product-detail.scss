@@ -1,5 +1,32 @@
 page-product-detail {
-
+  .progress-box {
+    color: red !important;
+    border-spacing: 1px;
+    .progress-bar {
+        background-color: silver;
+        height: 15px;
+        width: 90%;
+        padding-top: 0.1px;
+        padding-bottom: 0.1px;
+        padding-left: 0.1px;
+        padding-right: 0.1px; 
+        margin-top: 7px; 
+        border-radius: 2px;
+        span {
+            text-align: center;
+            display: inline-block;
+            height: 100%;
+            border-radius: 2px;
+            background-color: #ffb400;
+            transition: width .4s ease-in-out;
+        }
+    }
+    p {
+        ion-row {
+            height: 15px;
+        }
+    }
+}
 
     ul {
         padding: 0px;
