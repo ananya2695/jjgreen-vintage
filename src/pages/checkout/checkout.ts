@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 import { CompletePage } from './../complete/complete';
@@ -39,7 +39,7 @@ export class CheckoutPage {
     }
   ];
   currentstep: number = 1;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService, public addressService: AddressService, public paymentService: PaymentService,public orderService: OrderService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService, public addressService: AddressService, public paymentService: PaymentService, public orderService: OrderService, public app: App) {
     this.getShippingData();
     this.getAddressData();
     this.getPayment();
@@ -93,7 +93,9 @@ export class CheckoutPage {
     console.log(this.dataconfirm);
     if (this.dataconfirm) {
       this.orderService.createOrder(this.dataconfirm).then((data) => {
-        this.navCtrl.push(CompletePage);
+        // this.navCtrl.push(CompletePage);
+        window.localStorage.setItem('order', JSON.stringify(data));
+        this.app.getRootNav().setRoot(CompletePage); // set full page
       }, (error) => {
         console.error(error);
       });
