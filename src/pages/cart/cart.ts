@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { CartModel,CartService } from "@ngcommerce/core";
+import { CartModel, CartService } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
 
 
@@ -23,12 +23,14 @@ export class CartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public cartService: CartService,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController
   ) {
 
   }
 
   ionViewWillEnter() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     let cartStorage = this.cartService.getCartStorage();
     if (cartStorage) {
       if (cartStorage.items && cartStorage.items.length > 0) {
@@ -38,6 +40,7 @@ export class CartPage {
     } else {
       this.cart.items = [];
     }
+    loading.dismiss();
   }
 
   ionViewWillLeave() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CorService, ProductListModel, ProductService, FavoriteListModel, FavoriteService } from "@ngcommerce/core";
 import { Http } from '@angular/http';
 import { ProductDetailPage } from '../product-detail/product-detail';
@@ -21,7 +21,8 @@ export class FavoritePage {
     public navParams: NavParams, 
     public favoriteService: FavoriteService, 
     public http: Http, 
-    public productService: ProductService) {
+    public productService: ProductService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewWillEnter() {
@@ -30,9 +31,12 @@ export class FavoritePage {
     //this.getListProduct();
   }
   getListFavorite() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     let favorites = this.favoriteService.getFavoriteList();
     console.log(favorites);
     this.favorite = favorites ? favorites : {items:[]};
+    loading.dismiss();
   }
    getListProduct() {
     this.productService.getProductList().then((data) => {
