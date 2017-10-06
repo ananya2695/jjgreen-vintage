@@ -17,7 +17,11 @@ import { ProductDetailPage } from '../product-detail/product-detail';
 })
 export class FavoritePage {
   favorite : any = {items:[]};
-  constructor(public navCtrl: NavController, public navParams: NavParams, public favoriteService: FavoriteService, public http: Http, public productService: ProductService) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public favoriteService: FavoriteService, 
+    public http: Http, 
+    public productService: ProductService) {
   }
 
   ionViewWillEnter() {

@@ -27,7 +27,8 @@ export class LoginPage {
     public viewCtrl: ViewController,
     public loading: LoadingController,
     private fb: Facebook,
-    public cartService: CartService
+    public cartService: CartService,
+    
   ) {
   }
 
@@ -76,12 +77,15 @@ export class LoginPage {
   }
 
   getCartByUser() {
+    let loading = this.loading.create();
+    loading.present();
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
 
     this.cartService.getCartByUser(user._id).then((data) => {
       this.cartService.saveCartStorage(data);
+      loading.dismiss();
     }, (error) => {
-
+      loading.dismiss();
     });
   }
 

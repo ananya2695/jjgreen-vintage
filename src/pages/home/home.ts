@@ -25,7 +25,7 @@ export class HomePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public homeService: HomeService
+    public homeService: HomeService,
   ) {
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CartModel,CartService } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
 
@@ -22,7 +22,8 @@ export class CartPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public cartService: CartService
+    public cartService: CartService,
+    public loadingCtrl: LoadingController,
   ) {
 
   }
@@ -55,12 +56,17 @@ export class CartPage {
   }
 
   createCart(cart) {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     this.cartService.createCart(cart).then((data) => {
       console.log('create success.');
       this.cartService.saveCartStorage(data);
+      loading.dismiss();
     }, (error) => {
+      loading.dismiss();
       alert(JSON.parse(error._body).message);
     });
+
   }
 
   updateCart(cart) {

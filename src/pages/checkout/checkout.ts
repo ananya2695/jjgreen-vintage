@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, App, LoadingController } from 'ionic-angular';
 import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 import { CompletePage } from './../complete/complete';
@@ -39,7 +39,15 @@ export class CheckoutPage {
     }
   ];
   currentstep: number = 1;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public cartService: CartService, public addressService: AddressService, public paymentService: PaymentService, public orderService: OrderService, public app: App) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public modalCtrl: ModalController, 
+    public cartService: CartService, 
+    public addressService: AddressService, 
+    public paymentService: PaymentService, 
+    public orderService: OrderService, 
+    public app: App,
+    public loadingCtrl: LoadingController) {
     this.getShippingData();
     this.getAddressData();
     this.getPayment();
@@ -50,28 +58,40 @@ export class CheckoutPage {
   }
 
   getShippingData() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
     this.cartService.getCartByUser(user._id).then((data) => {
       console.log(data);
       this.shipping = data;
+      loading.dismiss();      
       // console.log(this.shipping);
     }, (error) => {
+      loading.dismiss();
       console.error(error);
     });
   }
   getAddressData() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     this.addressService.getAddressByUser().then((data) => {
       this.address = data;
+      loading.dismiss(); 
     }, (error) => {
+      loading.dismiss(); 
       console.error(error);
     });
   }
 
   getPayment() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     this.paymentService.getPaymentList().then((data) => {
       this.payment = data[0];
       console.log(this.payment);
+      loading.dismiss(); 
     }, (err) => {
+      loading.dismiss(); 
       console.error(err);
     });
   }
@@ -104,8 +124,13 @@ export class CheckoutPage {
   openFormAddress(e) {
     let modal = this.modalCtrl.create(FormAddressPage);
     modal.onDidDismiss(data => {
+      let loading = this.loadingCtrl.create();
+      loading.present();
       this.addressService.createAddress(data).then(resp => {
+        loading.dismiss(); 
         this.getAddressData();
+      },err=>{
+        loading.dismiss(); 
       })
       console.log(data);
 
