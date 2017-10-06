@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, App, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { HomeService, HomeCategoryModel } from "@ngcommerce/core";
+import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/core";
 import { LoginPage } from '../login/login';
 /**
  * Generated class for the HomePage page.
@@ -17,6 +17,7 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   homeData = {} as HomeCategoryModel;
+  lastVisit = [] as Array<ProductItemModel>;
   pages: string;
 
   constructor(
@@ -31,6 +32,7 @@ export class HomePage {
   ionViewWillEnter() {
     console.log('ionViewDidLoad HomePage');
     this.getHomeData();
+    this.getLastVisit();
   }
 
   getHomeData() {
@@ -42,9 +44,14 @@ export class HomePage {
       loading.dismiss();
     }, (error) => {
       console.log(error);
-      loading.dismiss();      
+      loading.dismiss();
     });
 
+  }
+
+  getLastVisit() {
+    this.lastVisit = this.homeService.getLastVisit();
+    console.log(this.lastVisit.length);
   }
 
   onSelectedPage(index) {
