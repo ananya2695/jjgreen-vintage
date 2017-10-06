@@ -29,6 +29,7 @@
     <div *ngFor="let segment of homeData.categories; let i = index;" [hidden]="i != pages">
 
       <ion-grid>
+
         <ion-row no-padding>
           <ion-col col-12>
             <img class="font-jjgreen" src="./assets/image/WDS2.jpg">
@@ -39,6 +40,7 @@
             </ion-row>
           </ion-col>
         </ion-row>
+
         <ion-row *ngIf="segment.popularproducts">
           <ion-col col-12 class="highLight" text-center>
             <h4>Popular Products</h4>
@@ -47,14 +49,25 @@
             <ion-list-grid [items]="segment.popularproducts"></ion-list-grid>
           </ion-col>
         </ion-row>
+
         <ion-row *ngIf="segment.bestseller" id="rowBest">
+          <ion-col col-12 class="highLight" text-center>
+            <h4>Best Seller</h4>
+          </ion-col>
+          <ion-col col-12 class="grid-product">
+            <ion-list-grid [items]="segment.bestseller"></ion-list-grid>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="segment.popularshops" id="rowBest">
             <ion-col col-12 class="highLight" text-center>
-              <h4>Best Seller</h4>
+              <h4>Popular Shops</h4>
             </ion-col>
             <ion-col col-12 class="grid-product">
-              <ion-list-grid [items]="segment.bestseller"></ion-list-grid>
+              <ion-list-grid [items]="segment.popularshops"></ion-list-grid>
             </ion-col>
           </ion-row>
+
       </ion-grid>
 
     </div>
