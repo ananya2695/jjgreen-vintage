@@ -33,11 +33,15 @@ export class ProductDetailPage {
   }
 
   init() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     this.productService.getProductByID(this.navParams.data._id)
       .then(data => {
         this.product = data;
         console.log(this.product);
-
+        loading.dismiss();
+      },err=>{
+        loading.dismiss();
       });
   }
 
@@ -53,10 +57,14 @@ export class ProductDetailPage {
     let reviewModal = this.modalCtrl.create(WritereviewPage);
     reviewModal.onDidDismiss(data => {
       if (data && data.topic !== '' && data.comment !== '' && data.rate !== '') {
+        let loading = this.loadingCtrl.create();
+        loading.present();
         this.productService.reviewProduct(this.product._id, data)
           .then((resp) => {
+            loading.dismiss();
             this.init();
           }, (err) => {
+            loading.dismiss();
             console.error(err);
           });
       }
