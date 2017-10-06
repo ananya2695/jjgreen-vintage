@@ -6,8 +6,17 @@ page-search {
         overflow: hidden;
         text-overflow: ellipsis; 
     
-        color: #ab00ff
+        color: #7f3f00
          }
+
+         .item-ios p {
+            overflow: inherit;
+            font-size: 1.4rem;
+            line-height: normal;
+            text-overflow: inherit;
+            color: #d8625d;
+            margin: 0 0 2px;
+          }
 
          
          .item-md p {

@@ -12,7 +12,7 @@ page-cart {
         color: gray !important;
     }
     .price-red {
-        color: red !important;
+        color: #d8625d !important;
     }
     .text-decoration {
         text-decoration: line-through !important;
@@ -26,7 +26,7 @@ page-cart {
         width: 12em;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: #ab00ff
+        color: #7f3f00
     }
     p {
         font-size: 16px;
@@ -35,4 +35,26 @@ page-cart {
         display: inline-block;
         font-size: 2em;
     }
+
+    .button-ios-danger {
+        color: #fff;
+        background-color: #da615c;
+      }
+
+      #btnCart{
+        border-radius: 4px;
+        color: #fff;
+        background-color: #da615c;
+      }
+
+      .button-ios {
+        border-radius: 100%;
+        /* height: 2.8em; */
+        /* font-size: 1.6rem; */
+        color: #fff;
+        background-color: #5c926e;
+        margin: 0.4rem 0.2rem;
+        /* padding: 0 1em; */
+      }
+      
 }
