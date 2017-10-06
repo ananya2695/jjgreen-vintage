@@ -14,24 +14,43 @@
 
 
 <ion-content>
-  <ion-grid>
-    <ion-row no-padding>
-      <ion-col col-12>
-        <img class="font-jjgreen" src="./assets/image/WDS2.jpg">
+
+  <!-- segment -->
+  <div no-padding>
+    <ion-segment mode="md" [(ngModel)]="pages">
+      <ion-segment-button *ngFor="let segment of homeData.categories; let i = index;" [ngClass]="{'active-page' : i == pages}"
+        (click)="onSelectedPage(i)">
+        {{ segment.name }}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <!-- segment display -->
+  <div>
+    <div *ngFor="let segment of homeData.categories; let i = index;" [hidden]="i != pages">
+
+      <ion-grid>
         <ion-row no-padding>
-          <ion-col col-12 text-center>
-            <span class="icon-green-text"></span>
+          <ion-col col-12>
+            <img class="font-jjgreen" src="./assets/image/WDS2.jpg">
+            <ion-row no-padding>
+              <ion-col col-12 text-center>
+                <span class="icon-green-text"></span>
+              </ion-col>
+            </ion-row>
           </ion-col>
         </ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-slides class="margin-top-100">
-        <ion-slide>
-          <h4>High-Light</h4>
-          <ion-list-grid [items]="product.items"></ion-list-grid>
-        </ion-slide>
-      </ion-slides>
-    </ion-row>
-  </ion-grid>
+        <ion-row>
+          <ion-col col-12 class="highLight" text-center>
+            <h4>High-Light</h4>
+          </ion-col>
+          <ion-col col-12 class="grid-product">
+            <ion-list-grid [items]="segment.popularproducts"></ion-list-grid>
+            <ion-list-grid [items]="segment.bestseller"></ion-list-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+  </div>
+
 </ion-content>

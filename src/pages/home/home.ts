@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, App, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ProductListModel, ProductService } from "@ngcommerce/core";
-import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
 
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 /**
  * Generated class for the HomePage page.
  *
@@ -18,6 +20,8 @@ import { LoginPage } from '../login/login';
 })
 export class HomePage {
   product = {} as ProductListModel;
+  homeData = {};
+  pages: string;
 
   constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public productService: ProductService, public http: Http, public modalCtrl: ModalController) {
   }
@@ -25,6 +29,24 @@ export class HomePage {
   ionViewWillEnter() {
     console.log('ionViewDidLoad HomePage');
     this.getListProduct();
+    this.getHomeData();
+  }
+
+  getHomeData() {
+    this.pages = '0';
+    this.http.get('https://greenvintage-v1.herokuapp.com/api/dataofcategories')
+      .toPromise()
+      .then((response) => {
+        this.homeData = response.json();
+        console.log(this.homeData);
+      })
+      .catch((handleError) => {
+        console.log(handleError);
+      });
+  }
+
+  onSelectedPage(index) {
+    this.pages = index;
   }
 
   getListProduct() {
