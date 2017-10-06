@@ -14,12 +14,12 @@
 
 
 <ion-content>
-  <ion-list-cart *ngIf="cart.items" [items]="cart.items" (returnItems)="returnItems($event)"></ion-list-cart>
+  <ion-list-cart *ngIf="cart && cart.items" [items]="cart.items" (returnItems)="returnItems($event)"></ion-list-cart>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <div *ngIf="cart.items && cart.items.length > 0">
+    <div *ngIf="cart && cart.items && cart.items.length > 0">
       <ion-row class="categories-title">
         <ion-col col-7>
           <p class="color-black-custom font-bold">ราคารวมโดยประมาณ</p>
