@@ -69,9 +69,12 @@ page-home {
         margin-bottom: 22px !important;
         widows: 100% !important;
         z-index: 9999 !important;
-        h4{
-            margin-top: 1rem !important;
-        }
+        height: 38px;
+        
+    }
+
+    h4{
+        margin-top: 1rem !important;
     }
     .grid {
         padding: 0px;
@@ -122,4 +125,7 @@ page-home {
         color: #ffffff !important;
     }
     /* segment*/
+    #rowBest{
+        margin-top: -17px;
+    }
 }
