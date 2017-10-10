@@ -5,6 +5,7 @@ import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterPage } from '../register/register';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
+import { OneSignal } from '@ionic-native/onesignal';
 
 /**
  * Generated class for the LoginPage page.
@@ -28,7 +29,7 @@ export class LoginPage {
     public loading: LoadingController,
     private fb: Facebook,
     public cartService: CartService,
-    
+    public oneSignal: OneSignal
   ) {
   }
 
@@ -43,11 +44,17 @@ export class LoginPage {
       this.user = data; ///////////////////// บรรทัดนี้ตอนแรกยังไม่มี มาเขียนเพิ่มตอนที่จะไปโชว์ที่หน้าจอ ตามขั้นตอนด้านล่าง
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
+
       this.getCartByUser();
+
+      this.oneSignal.getIds().then((data) => {
+        this.authenService.pushNotificationUser({ id: data.userId });
+      });
+
       this.navCtrl.push(TabnavPage);
       loading.dismiss();
     }, (error) => {
-      console.error(error);
+      alert(JSON.parse(error._body).message);
       loading.dismiss();
     });
   }
