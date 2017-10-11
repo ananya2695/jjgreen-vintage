@@ -55,7 +55,7 @@ export class HomePage {
     loading.present();
     this.homeService.getHome().then((data) => {
       this.homeData = data;
-      // loading.dismiss();
+      loading.dismiss();
     }, (error) => {
       console.log(error);
       loading.dismiss();
