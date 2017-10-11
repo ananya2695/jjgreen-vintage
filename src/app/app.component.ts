@@ -50,7 +50,7 @@ export class MyApp {
     this.cartService.getCartByUser(user._id).then((data) => {
       this.cartService.saveCartStorage(data);
     }, (error) => {
-
+      window.localStorage.removeItem('jjuser');
     });
   }
 
