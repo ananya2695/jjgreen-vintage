@@ -35,8 +35,6 @@ export class ProductDetailPage {
   init() {
     let loading = this.loadingCtrl.create();
     loading.present();
-    console.log(this.navParams.data);
-
     this.productService.getProductByID(this.navParams.data._id)
       .then(data => {
         this.product = data;
