@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserModel, AuthenService } from "@ngcommerce/core";
 import { NotificationPage } from '../notification/notification';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -39,6 +40,10 @@ export class ProfilePage {
 
   loginModal(e) {
     this.navCtrl.push(LoginPage);
+  }
+
+  editProfile(e) {
+    this.navCtrl.push(EditProfilePage);
   }
 
 }
