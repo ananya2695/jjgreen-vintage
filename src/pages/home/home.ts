@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, App, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/core";
 import { LoginPage } from '../login/login';
+import { ListShopPage } from '../list-shop/list-shop';
 /**
  * Generated class for the HomePage page.
  *
@@ -60,5 +61,8 @@ export class HomePage {
   }
   gotoProductDetail(e) {
     this.navCtrl.push(ProductDetailPage, e)
+  }
+  gotoListShop(e){
+    this.navCtrl.push(ListShopPage, e)
   }
 }

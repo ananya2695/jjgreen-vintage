@@ -61,7 +61,7 @@
 
         <ion-row *ngIf="segment.popularshops && segment.popularshops.length > 0" id="rowBest">
           <ion-col col-12 class="highLight" text-center>
-            <h4>Popular Shops</h4>
+            <h4>Popular Shops <span (click)="gotoListShop()">see all</span></h4>
           </ion-col>
           <ion-col col-12 class="grid-product">
             <ion-list-grid [items]="segment.popularshops"></ion-list-grid>

@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent, IonFormProfileComponent, IonListCartComponent, IonListProductComponent, IonDetailProductComponent, IonFormReviewComponent, IonFormWizardComponent, IonFormWizardStepComponent, IonFormShippingComponent, IonFormPaymentComponent, IonFormConfirmComponent, IonFormPaymentOptionComponent, IonFormCreditComponent, IonFormDeliveryComponent, IonFormCounterserviceComponent } from "@ngcommerce/core";
+import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent, IonFormProfileComponent, IonListCartComponent, IonListProductComponent, IonDetailProductComponent, IonFormReviewComponent, IonFormWizardComponent, IonFormWizardStepComponent, IonFormShippingComponent, IonFormPaymentComponent, IonFormConfirmComponent, IonFormPaymentOptionComponent, IonFormCreditComponent, IonFormDeliveryComponent, IonFormCounterserviceComponent ,IonListShopComponent,IonDetailShopComponent} from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
 import { OneSignal } from '@ionic-native/onesignal';
 import { Facebook } from '@ionic-native/facebook';
@@ -24,6 +24,8 @@ import { FormAddressPage } from '../pages/form-address/form-address';
 import { CompletePage } from './../pages/complete/complete';
 import { WritereviewPage } from '../pages/writereview/writereview';
 import { NotificationPage } from '../pages/notification/notification';
+import { ListShopPage } from '../pages/list-shop/list-shop';
+import { ShopDetailPage } from '../pages/shop-detail/shop-detail';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,11 @@ import { NotificationPage } from '../pages/notification/notification';
     ProductDetailPage,
     IonDetailProductComponent,
     IonFormReviewComponent,
-    NotificationPage
+    NotificationPage,
+    ListShopPage,
+    IonListShopComponent,
+    ShopDetailPage,
+    IonDetailShopComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +89,9 @@ import { NotificationPage } from '../pages/notification/notification';
     FormAddressPage,
     CompletePage,
     WritereviewPage,
-    NotificationPage
+    NotificationPage,
+    ListShopPage,
+    ShopDetailPage
   ],
   providers: [
     StatusBar,
