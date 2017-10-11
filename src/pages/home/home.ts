@@ -1,3 +1,4 @@
+import { ProductDetailPage } from './../product-detail/product-detail';
 import { Component } from '@angular/core';
 import { IonicPage, App, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/core";
@@ -56,5 +57,8 @@ export class HomePage {
 
   onSelectedPage(index) {
     this.pages = index;
+  }
+  gotoProductDetail(e) {
+    this.navCtrl.push(ProductDetailPage, e)
   }
 }
