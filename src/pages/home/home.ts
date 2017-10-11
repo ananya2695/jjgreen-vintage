@@ -2,8 +2,9 @@ import { ProductDetailPage } from './../product-detail/product-detail';
 import { Component } from '@angular/core';
 import { IonicPage, App, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/core";
-import { LoginPage } from '../login/login';
 import { ListShopPage } from '../list-shop/list-shop';
+import { ListProductPage } from '../list-product/list-product';
+import { SearchPage } from '../search/search';
 /**
  * Generated class for the HomePage page.
  *
@@ -53,16 +54,26 @@ export class HomePage {
 
   getLastVisit() {
     this.lastVisit = this.homeService.getLastVisit();
-    console.log(this.lastVisit.length);
   }
 
   onSelectedPage(index) {
     this.pages = index;
   }
+
   gotoProductDetail(e) {
     this.navCtrl.push(ProductDetailPage, e)
   }
-  gotoListShop(e){
-    this.navCtrl.push(ListShopPage, e)
+
+  gotoListShop(cate) {
+    this.navCtrl.push(ListShopPage, cate);
   }
+
+  gotoListProduct(cate) {
+    this.navCtrl.push(ListProductPage, cate);
+  }
+
+  gotoSearchPage() {
+    this.navCtrl.push(SearchPage);
+  }
+
 }

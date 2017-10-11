@@ -7,12 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>listProduct</ion-title>
+    <ion-title>{{ products.title }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-list-product [items]="products.items" [showSearch]="false" (selectedProduct)="selectedProduct($event)"></ion-list-product>
 
 </ion-content>

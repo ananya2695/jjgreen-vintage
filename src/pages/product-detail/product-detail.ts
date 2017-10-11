@@ -70,7 +70,7 @@ export class ProductDetailPage {
 
   selectedFavorite(product) {
     product.image = product.images[0];
-    product.isFavorite = true;
+    product.isFavorite = !product.isFavorite;
     this.favoriteService.addFavorite(product);
   }
   reviewModal(e) {
