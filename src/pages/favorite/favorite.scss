@@ -37,5 +37,12 @@ page-favorite {
     color: #d8625d;
     margin: 0 0 2px;
   }
-
+  #price{
+    text-decoration: line-through;
+    color: #bdbdbd;
+    font-size: 13px;
+  }
+  #percentofdiscount{
+    font-size: 13px;
+  }
 }

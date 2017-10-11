@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ShopListModel, ShopService } from "@ngcommerce/core";
+import { ShopListModel, HomeService } from "@ngcommerce/core";
 import { ShopDetailPage } from '../shop-detail/shop-detail';
 
 /**
@@ -17,22 +17,25 @@ import { ShopDetailPage } from '../shop-detail/shop-detail';
 })
 export class ListShopPage {
   shop = {} as ShopListModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public shopService: ShopService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public homeService: HomeService
+  ) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListShopPage');
-    this.getShop();
+    this.getShop(this.navParams.data);
   }
-  getShop() {
-    this.shopService.getShopList().then((data) => {
+  getShop(category) {
+    this.homeService.seeAllShop(category).then((data) => {
       this.shop = data;
       console.log(this.shop);
     }, (err) => {
       console.log(err);
     });
   }
-  selected(e){
-    this.navCtrl.push(ShopDetailPage,e);
+  selected(e) {
+    this.navCtrl.push(ShopDetailPage, e);
   }
 }
