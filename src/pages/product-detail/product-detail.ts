@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
-import { ProductModel, ProductService, FavoriteService, CartService, FavoriteListModel } from "@ngcommerce/core";
+import { ProductModel, ProductService, FavoriteService, CartService } from "@ngcommerce/core";
 import { WritereviewPage } from '../writereview/writereview';
 import { CartPage } from '../cart/cart';
 import { LoginPage } from '../login/login';
