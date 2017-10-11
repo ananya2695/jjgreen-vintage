@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { OneSignal } from '@ionic-native/onesignal';
 
 import { TabnavPage } from "../pages/tabnav/tabnav";
-import { LoginPage } from "../pages/login/login";
 import { ProfilePage } from '../pages/profile/profile';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
 
@@ -29,7 +28,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      this.onSignalSetup();
+      if (platform.is('cordova')) {
+        this.onSignalSetup();
+      }
     });
 
     this.getUser();
@@ -38,9 +39,7 @@ export class MyApp {
   getUser() {
     let user = window.localStorage.getItem('jjuser');
 
-    if (!user) {
-      this.rootPage = LoginPage;
-    } else {
+    if (user) {
       this.getCartByUser();
     }
   }

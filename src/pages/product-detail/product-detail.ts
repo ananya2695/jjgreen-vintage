@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { ProductModel, ProductService, FavoriteService, CartService } from "@ngcommerce/core";
 import { WritereviewPage } from '../writereview/writereview';
 import { CartPage } from '../cart/cart';
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -40,7 +41,7 @@ export class ProductDetailPage {
         this.product = data;
         console.log(this.product);
         loading.dismiss();
-      },err=>{
+      }, err => {
         loading.dismiss();
       });
   }
@@ -73,10 +74,20 @@ export class ProductDetailPage {
   }
 
   addToCart(product) {
-    let loading = this.loadingCtrl.create();
-    loading.present();
-    this.cartService.addToCart(product);
-    this.navCtrl.push(CartPage);
-    loading.dismiss();
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+
+    if (user) {
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.cartService.addToCart(product);
+      this.navCtrl.push(CartPage);
+      loading.dismiss();
+    } else {
+      this.showLogInPage();
+    }
+  }
+
+  showLogInPage() {
+    this.navCtrl.push(LoginPage);
   }
 }

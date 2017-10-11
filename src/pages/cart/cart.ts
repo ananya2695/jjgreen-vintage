@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CartModel, CartService } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -29,18 +30,31 @@ export class CartPage {
   }
 
   ionViewWillEnter() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
-    let cartStorage = this.cartService.getCartStorage();
-    if (cartStorage) {
-      if (cartStorage.items && cartStorage.items.length > 0) {
-        this.cart = cartStorage;
-        this.onCalculate();
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+
+    if (user) {
+      let loading = this.loadingCtrl.create();
+      loading.present();
+
+      let cartStorage = this.cartService.getCartStorage();
+      if (cartStorage) {
+        if (cartStorage.items && cartStorage.items.length > 0) {
+          this.cart = cartStorage;
+          this.onCalculate();
+        }
       }
+
+      loading.dismiss();
     } else {
-      this.cart.items = [];
+
+      this.showLogInPage();
+
     }
-    loading.dismiss();
+
+  }
+
+  showLogInPage() {
+    this.navCtrl.push(LoginPage);
   }
 
   ionViewWillLeave() {
