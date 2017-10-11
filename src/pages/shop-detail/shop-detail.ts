@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,LoadingController,ModalController} from 'ionic-angular';
 import { ShopModel, ShopService } from "@ngcommerce/core";
+import { WritereviewPage } from '../writereview/writereview';
 
 /**
  * Generated class for the ShopDetailPage page.
@@ -16,7 +17,7 @@ import { ShopModel, ShopService } from "@ngcommerce/core";
 })
 export class ShopDetailPage {
   shop = {} as ShopModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public shopService:ShopService,public loadingCtrl:LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public shopService:ShopService,public loadingCtrl:LoadingController,public modalCtrl:ModalController) {
   }
 
   ionViewDidLoad() {
@@ -34,5 +35,23 @@ export class ShopDetailPage {
       }, err => {
         loading.dismiss();
       });
+  }
+  reviewModal(e) {
+    let reviewModal = this.modalCtrl.create(WritereviewPage);
+    reviewModal.onDidDismiss(data => {
+      if (data && data.topic !== '' && data.comment !== '' && data.rate !== '') {
+        let loading = this.loadingCtrl.create();
+        loading.present();
+        this.shopService.reviewShop(this.shop._id, data)
+          .then((resp) => {
+            loading.dismiss();
+            this.init();
+          }, (err) => {
+            loading.dismiss();
+            console.error(err);
+          });
+      }
+    });
+    reviewModal.present();
   }
 }

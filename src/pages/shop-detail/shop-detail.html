@@ -14,5 +14,5 @@
 
 
 <ion-content>
-  <ion-detail-shop *ngIf="shop"  [item]="shop"></ion-detail-shop>
+  <ion-detail-shop *ngIf="shop"  [item]="shop" [isReview]="true" (review)="reviewModal($event)"></ion-detail-shop>
 </ion-content>
