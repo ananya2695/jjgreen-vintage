@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
-import { ProductModel, ProductService, FavoriteService, CartService } from "@ngcommerce/core";
+import { ProductModel, ProductService, FavoriteService, CartService, FavoriteListModel } from "@ngcommerce/core";
 import { WritereviewPage } from '../writereview/writereview';
 import { CartPage } from '../cart/cart';
 import { LoginPage } from '../login/login';
@@ -20,6 +20,7 @@ import { LoginPage } from '../login/login';
 })
 export class ProductDetailPage {
   product = {} as ProductModel;
+  favoriteListModel: any = { items: [] };
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,11 +40,28 @@ export class ProductDetailPage {
     this.productService.getProductByID(this.navParams.data._id)
       .then(data => {
         this.product = data;
+        this.product.isFavorite = this.isFavoriteService(this.product);
         console.log(this.product);
         loading.dismiss();
       }, err => {
         loading.dismiss();
       });
+  }
+
+  isFavoriteService(product) {
+    let favorites = this.favoriteService.getFavoriteList();
+    this.favoriteListModel = favorites ? favorites : { items: [] };
+
+    let isFavorite = false;
+
+    for (var i = 0; i < this.favoriteListModel.items.length; i++) {
+      let element = this.favoriteListModel.items[i];
+      if (element._id === product._id) {
+        isFavorite = true;
+        break;
+      }
+    }
+    return isFavorite;
   }
 
   ionViewDidLoad() {
@@ -52,6 +70,7 @@ export class ProductDetailPage {
 
   selectedFavorite(product) {
     product.image = product.images[0];
+    product.isFavorite = true;
     this.favoriteService.addFavorite(product);
   }
   reviewModal(e) {
