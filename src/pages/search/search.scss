@@ -40,4 +40,12 @@ page-search {
                 }
             }
         }
+        #price{
+            text-decoration: line-through;
+            color: #bdbdbd;
+            font-size: 13px;
+          }
+          #percentofdiscount{
+            font-size: 13px;
+          }
 }

@@ -123,4 +123,20 @@ page-product-detail {
     // width: 378px !important;
     height: 336px !important;
   }
+  #price{
+    text-decoration: line-through;
+    color: #bdbdbd;
+    font-size: 13px;
+  }
+  #percentofdiscount{
+    font-size: 13px;
+    color: #ff0000;
+  }
+  #promotionprice{
+    color: #ff0000;
+  }
+  #priceNormal{
+    color: #ff0000;
+    font-size: 16px;
+  }
 }

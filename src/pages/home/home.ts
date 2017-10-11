@@ -2,8 +2,9 @@ import { ProductDetailPage } from './../product-detail/product-detail';
 import { Component } from '@angular/core';
 import { IonicPage, App, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/core";
-import { LoginPage } from '../login/login';
 import { ListShopPage } from '../list-shop/list-shop';
+import { ListProductPage } from '../list-product/list-product';
+import { SearchPage } from '../search/search';
 /**
  * Generated class for the HomePage page.
  *
@@ -39,7 +40,18 @@ export class HomePage {
 
   getHomeData() {
     this.pages = '0';
-    let loading = this.loadingCtrl.create();
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<div class="lds-css ng-scope">
+                  <div style="width:100%;height:100%" class="lds-eclipse">
+                    <div class="div-image">
+                      <img src="./assets/icon/icon.png" class="loading-image">
+                    </div>
+                    <div class="spin">
+                    </div>
+                  </div>
+                </div>`
+      });
     loading.present();
     this.homeService.getHome().then((data) => {
       this.homeData = data;
@@ -53,16 +65,26 @@ export class HomePage {
 
   getLastVisit() {
     this.lastVisit = this.homeService.getLastVisit();
-    console.log(this.lastVisit.length);
   }
 
   onSelectedPage(index) {
     this.pages = index;
   }
+
   gotoProductDetail(e) {
     this.navCtrl.push(ProductDetailPage, e)
   }
-  gotoListShop(e){
-    this.navCtrl.push(ListShopPage, e)
+
+  gotoListShop(cate) {
+    this.navCtrl.push(ListShopPage, cate);
   }
+
+  gotoListProduct(cate) {
+    this.navCtrl.push(ListProductPage, cate);
+  }
+
+  gotoSearchPage() {
+    this.navCtrl.push(SearchPage);
+  }
+
 }
