@@ -1,3 +1,118 @@
 page-login {
 
+    .fixed-content {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        display: block;
+        background-color: #fff;
+        background-image: url('../assets/image/3x.jpg');
+        // background-image: url('../assets/image/1.jpg');
+        //  background-image: url('../assets/image/2.jpg');  
+        // background-image: url('../assets/image/4.jpg');
+        // background-image: url('../assets/image/5.jpg');
+        // background-image: url('../assets/image/6.jpg');
+        
+      }
+
+      .item-ios {
+        padding-left: 16px;
+        border-radius: 0;
+        position: relative;
+        font-size: 1.7rem;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.5);
+        /* -webkit-transition: background-color 200ms linear; */
+        transition: background-color 200ms linear;
+      }
+      img {
+        max-width: 100%;
+        border: 0;
+        /* text-align: center; */
+      }
+      
+      .item-md {
+        padding-left: 16px;
+        padding-right: 0;
+        position: relative;
+        font-size: 1.6rem;
+        font-weight: normal;
+        text-transform: none;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.22);
+        /* -webkit-box-shadow: none; */
+        box-shadow: none;
+        /* -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1); */
+        transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .item-input .label-md,
+      .item-select .label-md,
+      .item-datetime .label-md {
+        color: #fff;
+      }
+
+      ion-icon {
+        display: inline-block;
+        font-size: 1.2em;
+        margin-right: 12px;
+      }
+
+      .button-ios {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background-color: #2f5aa7;
+        margin: 0.4rem 0.2rem;
+        padding: 0 1em;
+      }
+
+      .button-md {
+        border-radius: 2px;
+        overflow: hidden;
+        height: 3.6rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #204b96;
+       
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0.4rem 0.2rem;
+        padding: 0 1.1em;
+      }
+
+      #btnlogin {
+        border-radius: 2px;
+        overflow: hidden;
+        height: 3.6rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #5c926e;
+       
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0.4rem 0.2rem;
+        padding: 0 1.1em;
+      }
+      
+      #btnregister {
+        border-radius: 2px;
+        overflow: hidden;
+        height: 3.6rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #d8625d;
+       
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0.4rem 0.2rem;
+        padding: 0 1.1em;
+      }
+
 }

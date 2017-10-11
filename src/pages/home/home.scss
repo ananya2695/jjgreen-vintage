@@ -37,13 +37,28 @@ page-home {
         text-overflow: ellipsis;
         color: #fff;
     }
+
+    .row {
+      
+        display: -ms-flexbox;
+        display: flex;
+      
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding-right: 4px;
+        // background-image: url('../assets/image/x2.png');
+      }
+
+      
     .p-margin-top-50[_ngcontent-c1] {
         margin-top: 0px;
         background-color: rgba(0, 0, 0, 0.5);
         width: 100%;
-        height: 70px;
+        height: 59px;
         margin-top: -5px;
         text-align: center;
+        font-size: 13px;
+      
     }
     .p-margin-top-40[_ngcontent-c1] {
         margin-top: 0px;
@@ -79,6 +94,7 @@ page-home {
 
     h4{
         margin-top: 1rem !important;
+        font-size: 1.8rem;
     }
     .grid {
         padding: 0px;
