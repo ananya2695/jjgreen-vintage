@@ -40,7 +40,18 @@ export class HomePage {
 
   getHomeData() {
     this.pages = '0';
-    let loading = this.loadingCtrl.create();
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<div class="lds-css ng-scope">
+                  <div style="width:100%;height:100%" class="lds-eclipse">
+                    <div class="div-image">
+                      <img src="./assets/icon/icon.png" class="loading-image">
+                    </div>
+                    <div class="spin">
+                    </div>
+                  </div>
+                </div>`
+      });
     loading.present();
     this.homeService.getHome().then((data) => {
       this.homeData = data;
