@@ -26,6 +26,7 @@ import { WritereviewPage } from '../pages/writereview/writereview';
 import { NotificationPage } from '../pages/notification/notification';
 import { ListShopPage } from '../pages/list-shop/list-shop';
 import { ShopDetailPage } from '../pages/shop-detail/shop-detail';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ListProductPage } from '../pages/list-product/list-product';
 
 @NgModule({
@@ -66,6 +67,7 @@ import { ListProductPage } from '../pages/list-product/list-product';
     IonListShopComponent,
     ShopDetailPage,
     IonDetailShopComponent,
+    EditProfilePage,
     ListProductPage
   ],
   imports: [
@@ -94,6 +96,7 @@ import { ListProductPage } from '../pages/list-product/list-product';
     NotificationPage,
     ListShopPage,
     ShopDetailPage,
+    EditProfilePage,
     ListProductPage
   ],
   providers: [
