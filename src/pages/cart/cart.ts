@@ -92,6 +92,7 @@ export class CartPage {
       this.cartService.saveCartStorage(data);
     }, (error) => {
       alert(JSON.parse(error._body).message);
+      this.navCtrl.push(LoginPage);
     });
   }
 
