@@ -5,6 +5,7 @@ import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/co
 import { ListShopPage } from '../list-shop/list-shop';
 import { ListProductPage } from '../list-product/list-product';
 import { SearchPage } from '../search/search';
+import { ShopDetailPage } from '../shop-detail/shop-detail';
 /**
  * Generated class for the HomePage page.
  *
@@ -51,7 +52,7 @@ export class HomePage {
                     </div>
                   </div>
                 </div>`
-      });
+    });
     loading.present();
     this.homeService.getHome().then((data) => {
       this.homeData = data;
@@ -72,7 +73,7 @@ export class HomePage {
   }
 
   gotoProductDetail(e) {
-    this.navCtrl.push(ProductDetailPage, e)
+    this.navCtrl.push(ProductDetailPage, e);
   }
 
   gotoListShop(cate) {
@@ -87,4 +88,7 @@ export class HomePage {
     this.navCtrl.push(SearchPage);
   }
 
+  gotoShopDetail(e) {
+    this.navCtrl.push(ShopDetailPage, e);
+  }
 }
