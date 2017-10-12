@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, App, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 import { CompletePage } from './../complete/complete';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 
 /**
@@ -47,7 +48,8 @@ export class CheckoutPage {
     public paymentService: PaymentService,
     public orderService: OrderService,
     public app: App,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl : LoadingProvider 
+  ) {
     this.getShippingData();
     this.getAddressData();
     this.getPayment();
@@ -58,32 +60,29 @@ export class CheckoutPage {
   }
 
   getShippingData() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.shipping = this.cartService.getCartStorage();
-    loading.dismiss();
+    this.loadingCtrl.dismiss();
   }
   getAddressData() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.addressService.getAddressByUser().then((data) => {
       this.address = data;
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (error) => {
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
       console.error(error);
     });
   }
 
   getPayment() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.paymentService.getPaymentList().then((data) => {
       this.payment = data[0];
       console.log(this.payment);
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (err) => {
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
       console.error(err);
     });
   }
@@ -116,13 +115,12 @@ export class CheckoutPage {
   openFormAddress(e) {
     let modal = this.modalCtrl.create(FormAddressPage);
     modal.onDidDismiss(data => {
-      let loading = this.loadingCtrl.create();
-      loading.present();
+      this.loadingCtrl.onLoading();
       this.addressService.createAddress(data).then(resp => {
-        loading.dismiss();
+        this.loadingCtrl.dismiss();
         this.getAddressData();
       }, err => {
-        loading.dismiss();
+        this.loadingCtrl.dismiss();
       })
       console.log(data);
 

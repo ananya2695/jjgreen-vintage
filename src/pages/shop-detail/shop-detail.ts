@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController,ModalController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ModalController} from 'ionic-angular';
 import { ShopModel, ShopService } from "@ngcommerce/core";
 import { WritereviewPage } from '../writereview/writereview';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the ShopDetailPage page.
@@ -17,7 +18,13 @@ import { WritereviewPage } from '../writereview/writereview';
 })
 export class ShopDetailPage {
   shop = {} as ShopModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public shopService:ShopService,public loadingCtrl:LoadingController,public modalCtrl:ModalController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public shopService:ShopService,
+    public modalCtrl:ModalController,
+    public loadingCtrl : LoadingProvider 
+  ) {
   }
 
   ionViewDidLoad() {
@@ -25,29 +32,28 @@ export class ShopDetailPage {
     this.init();
   }
   init(){
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.shopService.getShopByID(this.navParams.data._id)
       .then(data => {
         this.shop = data;
         console.log(this.shop);
-        loading.dismiss();
+        this.loadingCtrl.dismiss();
       }, err => {
-        loading.dismiss();
+        this.loadingCtrl.dismiss();
       });
   }
   reviewModal(e) {
     let reviewModal = this.modalCtrl.create(WritereviewPage);
     reviewModal.onDidDismiss(data => {
       if (data && data.topic !== '' && data.comment !== '' && data.rate !== '') {
-        let loading = this.loadingCtrl.create();
-        loading.present();
+        
+        this.loadingCtrl.onLoading();
         this.shopService.reviewShop(this.shop._id, data)
           .then((resp) => {
-            loading.dismiss();
+            this.loadingCtrl.dismiss();
             this.init();
           }, (err) => {
-            loading.dismiss();
+            this.loadingCtrl.dismiss();
             console.error(err);
           });
       }

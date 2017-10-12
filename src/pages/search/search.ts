@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProductListModel, ProductService } from "@ngcommerce/core";
 import { Http } from '@angular/http';
 import { ProductDetailPage } from '../product-detail/product-detail';
+import { LoadingProvider } from '../../providers/loading/loading';
 /**
  * Generated class for the SearchPage page.
  *
@@ -25,7 +26,8 @@ export class SearchPage {
     public navParams: NavParams,
     public productService: ProductService,
     public http: Http,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl : LoadingProvider 
+  ) {
   }
 
   ionViewWillEnter() {
@@ -34,16 +36,15 @@ export class SearchPage {
   }
 
   getListProduct() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.productService.getProductList().then((data) => {
 
       this.setDataInfinite(data);
 
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
       console.log(data);
     }, (error) => {
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
       console.error(error);
     });
   }

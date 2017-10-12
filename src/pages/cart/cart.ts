@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CartModel, CartService } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
 import { LoginPage } from '../login/login';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 
 /**
@@ -24,7 +25,7 @@ export class CartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public cartService: CartService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl : LoadingProvider    
   ) {
 
   }
@@ -33,8 +34,7 @@ export class CartPage {
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
 
     if (user) {
-      let loading = this.loadingCtrl.create();
-      loading.present();
+      this.loadingCtrl.onLoading();
 
       let cartStorage = this.cartService.getCartStorage();
       if (cartStorage) {
@@ -44,7 +44,7 @@ export class CartPage {
         }
       }
 
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     } else {
 
       this.showLogInPage();
@@ -73,14 +73,13 @@ export class CartPage {
   }
 
   createCart(cart) {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.cartService.createCart(cart).then((data) => {
       console.log('create success.');
       this.cartService.saveCartStorage(data);
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (error) => {
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
       alert(JSON.parse(error._body).message);
     });
 

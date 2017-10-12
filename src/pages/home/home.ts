@@ -1,11 +1,12 @@
 import { ProductDetailPage } from './../product-detail/product-detail';
 import { Component } from '@angular/core';
-import { IonicPage, App, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, App, NavController, NavParams } from 'ionic-angular';
 import { HomeService, HomeCategoryModel, ProductItemModel } from "@ngcommerce/core";
 import { ListShopPage } from '../list-shop/list-shop';
 import { ListProductPage } from '../list-product/list-product';
 import { SearchPage } from '../search/search';
 import { ShopDetailPage } from '../shop-detail/shop-detail';
+import { LoadingProvider } from '../../providers/loading/loading';
 /**
  * Generated class for the HomePage page.
  *
@@ -28,8 +29,8 @@ export class HomePage {
     public app: App,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController,
     public homeService: HomeService,
+    public loadingCtrl : LoadingProvider
   ) {
   }
 
@@ -41,25 +42,13 @@ export class HomePage {
 
   getHomeData() {
     this.pages = '0';
-    let loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-                  <div style="width:100%;height:100%" class="lds-eclipse">
-                    <div class="div-image">
-                      <img src="./assets/icon/icon.png" class="loading-image">
-                    </div>
-                    <div class="spin">
-                    </div>
-                  </div>
-                </div>`
-    });
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.homeService.getHome().then((data) => {
       this.homeData = data;
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (error) => {
       console.log(error);
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     });
 
   }
