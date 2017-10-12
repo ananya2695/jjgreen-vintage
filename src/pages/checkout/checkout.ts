@@ -60,9 +60,9 @@ export class CheckoutPage {
   }
 
   getShippingData() {
-    this.loadingCtrl.onLoading();
+    // this.loadingCtrl.onLoading();
     this.shipping = this.cartService.getCartStorage();
-    this.loadingCtrl.dismiss();
+    // this.loadingCtrl.dismiss();
   }
   getAddressData() {
     this.loadingCtrl.onLoading();
@@ -76,13 +76,13 @@ export class CheckoutPage {
   }
 
   getPayment() {
-    this.loadingCtrl.onLoading();
+    // this.loadingCtrl.onLoading();
     this.paymentService.getPaymentList().then((data) => {
       this.payment = data[0];
       console.log(this.payment);
-      this.loadingCtrl.dismiss();
+      // this.loadingCtrl.dismiss();
     }, (err) => {
-      this.loadingCtrl.dismiss();
+      // this.loadingCtrl.dismiss();
       console.error(err);
     });
   }

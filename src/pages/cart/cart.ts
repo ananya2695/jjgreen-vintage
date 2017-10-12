@@ -73,13 +73,13 @@ export class CartPage {
   }
 
   createCart(cart) {
-    this.loadingCtrl.onLoading();
+    // this.loadingCtrl.onLoading();
     this.cartService.createCart(cart).then((data) => {
       console.log('create success.');
       this.cartService.saveCartStorage(data);
-      this.loadingCtrl.dismiss();
+      // this.loadingCtrl.dismiss();
     }, (error) => {
-      this.loadingCtrl.dismiss();
+      // this.loadingCtrl.dismiss();
       alert(JSON.parse(error._body).message);
     });
 
