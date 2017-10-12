@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>EDIT_PROFILE</ion-title>
+    <ion-title>EDIT PROFILE</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,6 +21,7 @@
       </ion-col>
       <ion-col col-6>
         <img src="http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png">
+        <!-- <img src="http://res.cloudinary.com/hflvlav04/image/upload/v1487834187/g3hwyieb7dl7ugdgj3tb.png"> -->
       </ion-col>
       <ion-col col-3>
 
@@ -36,8 +37,8 @@
     <ion-input type="text" value="{{editProfile.lastName}}" [(ngModel)]="editProfile.lastName"></ion-input>
   </ion-item>
   <div>
-    <button ion-button block (click)="editAccount()">EDIT</button>
+    <button ion-button block (click)="editAccount()">Save</button>
     <button ion-button block (click)="changePassword()">Change Password</button>
-    
+
   </div>
 </ion-content>
