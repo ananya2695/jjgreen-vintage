@@ -42,7 +42,7 @@
 
         <ion-row *ngIf="segment.popularproducts  && segment.popularproducts.length > 0">
           <ion-col col-12 class="highLight" text-center>
-            <h4>Popular Products <span (click)="gotoListProduct(segment.name)">see all</span></h4>
+            <h4>Popular Products <span (click)="gotoListProduct(segment.name)" id="seeall">see all</span></h4>
           </ion-col>
           <ion-col col-12 class="grid-product">
             <ion-list-grid [items]="segment.popularproducts" (itemClicked)="gotoProductDetail($event)"></ion-list-grid>
@@ -51,7 +51,7 @@
 
         <ion-row *ngIf="segment.bestseller && segment.bestseller.length > 0" id="rowBest">
           <ion-col col-12 class="highLight" text-center>
-            <h4>Best Seller <span (click)="gotoListProduct(segment.name)">see all</span></h4>
+            <h4>Best Seller <span (click)="gotoListProduct(segment.name)"id="seeall">see all</span></h4>
           </ion-col>
           <ion-col col-12 class="grid-product">
             <ion-list-grid [items]="segment.bestseller" (itemClicked)="gotoProductDetail($event)"></ion-list-grid>
@@ -60,7 +60,7 @@
 
         <ion-row *ngIf="segment.popularshops && segment.popularshops.length > 0" id="rowBest">
           <ion-col col-12 class="highLight" text-center>
-            <h4>Popular Shops <span (click)="gotoListShop(segment.name)">see all</span></h4>
+            <h4>Popular Shops <span (click)="gotoListShop(segment.name)" id="seeall">see all</span></h4>
           </ion-col>
           <ion-col col-12 class="grid-product">
             <ion-list-grid [items]="segment.popularshops"></ion-list-grid>
