@@ -13,7 +13,15 @@
 </ion-header>
 
 
+    
+  
+
 <ion-content padding>
+    <!-- <ion-col col-12>
+        <img src="./assets/image/icon.png">
+   
+      </ion-col>
+       -->
   <ion-list>
 
     <ion-item>
@@ -27,8 +35,18 @@
     </ion-item>
 
   </ion-list>
-
-  <button ion-button block (click)="login(user)">Login</button>
-  <button ion-button block (click)="register()">Register</button>
-  <button ion-button block (click)="loginFb()">Login with Facebook</button>
+  <ion-row>
+    <ion-col>
+      <button id="btnlogin" ion-button block (click)="login(user)">Login</button>
+    </ion-col>
+    <ion-col>
+      <button id="btnregister" ion-button block (click)="register()">Register</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button block (click)="loginFb()">
+        <ion-icon name="logo-facebook"></ion-icon>Login with Facebook</button>
+    </ion-col>
+  </ion-row>
 </ion-content>
