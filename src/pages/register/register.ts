@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SignupModel } from "@ngcommerce/core";
 import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { LoginPage } from '../login/login';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the RegisterPage page.
@@ -24,7 +25,7 @@ export class RegisterPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public authenService: AuthenService,
-    public loading: LoadingController,
+    public loadingCtrl : LoadingProvider ,
     public cartService: CartService
   ) {
 
@@ -41,15 +42,14 @@ export class RegisterPage {
   }
 
   onRegister() {
-    let loading = this.loading.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.authenService.signUp(this.signup).then((data) => {
       window.localStorage.setItem('jjuser', JSON.stringify(data));
       this.navCtrl.push(LoginPage);
       this.getCartByUser();
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (error) => {
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
       alert(JSON.parse(error._body).message);
     });
   }

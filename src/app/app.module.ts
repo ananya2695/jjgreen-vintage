@@ -28,6 +28,7 @@ import { ListShopPage } from '../pages/list-shop/list-shop';
 import { ShopDetailPage } from '../pages/shop-detail/shop-detail';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ListProductPage } from '../pages/list-product/list-product';
+import { LoadingProvider } from '../providers/loading/loading';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { ListProductPage } from '../pages/list-product/list-product';
     SplashScreen,
     OneSignal,
     Facebook,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    LoadingProvider
   ]
 })
 export class AppModule { }

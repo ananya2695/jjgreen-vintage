@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, Platform, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { IonicPage, Platform, NavController, NavParams, ViewController } from 'ionic-angular';
 import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterPage } from '../register/register';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 import { OneSignal } from '@ionic-native/onesignal';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,11 +27,11 @@ export class LoginPage {
     public navParams: NavParams,
     public authenService: AuthenService,
     public viewCtrl: ViewController,
-    public loading: LoadingController,
     private fb: Facebook,
     public cartService: CartService,
     public oneSignal: OneSignal,
-    public platform: Platform
+    public platform: Platform,
+    public loadingCtrl: LoadingProvider
   ) {
   }
 
@@ -39,8 +40,7 @@ export class LoginPage {
   }
 
   login(user) {
-    let loading = this.loading.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.authenService.signIn(user).then((data) => {
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
@@ -54,11 +54,9 @@ export class LoginPage {
         });
 
       }
-
-      loading.dismiss();
     }, (error) => {
       alert(JSON.parse(error._body).message);
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     });
   }
 
@@ -87,16 +85,14 @@ export class LoginPage {
   }
 
   getCartByUser() {
-    let loading = this.loading.create();
-    loading.present();
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
 
     this.cartService.getCartByUser(user._id).then((data) => {
       this.cartService.saveCartStorage(data);
       this.navCtrl.pop();
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (error) => {
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     });
   }
 

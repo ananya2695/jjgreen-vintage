@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ProductModel, ProductService, FavoriteService, CartService } from "@ngcommerce/core";
 import { WritereviewPage } from '../writereview/writereview';
 import { CartPage } from '../cart/cart';
 import { LoginPage } from '../login/login';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 
 /**
@@ -28,23 +29,22 @@ export class ProductDetailPage {
     public favoriteService: FavoriteService,
     public modalCtrl: ModalController,
     public cartService: CartService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl : LoadingProvider 
   ) {
     // this.product = this.navParams.data;
     this.init();
   }
 
   init() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.productService.getProductByID(this.navParams.data._id)
       .then(data => {
         this.product = data;
         this.product.isFavorite = this.isFavoriteService(this.product);
         console.log(this.product);
-        loading.dismiss();
+        this.loadingCtrl.dismiss();
       }, err => {
-        loading.dismiss();
+        this.loadingCtrl.dismiss();
       });
   }
 
@@ -77,14 +77,13 @@ export class ProductDetailPage {
     let reviewModal = this.modalCtrl.create(WritereviewPage);
     reviewModal.onDidDismiss(data => {
       if (data && data.topic !== '' && data.comment !== '' && data.rate !== '') {
-        let loading = this.loadingCtrl.create();
-        loading.present();
+        this.loadingCtrl.onLoading();
         this.productService.reviewProduct(this.product._id, data)
           .then((resp) => {
-            loading.dismiss();
+            this.loadingCtrl.dismiss();
             this.init();
           }, (err) => {
-            loading.dismiss();
+            this.loadingCtrl.dismiss();
             console.error(err);
           });
       }
@@ -96,11 +95,10 @@ export class ProductDetailPage {
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
 
     if (user) {
-      let loading = this.loadingCtrl.create();
-      loading.present();
+      this.loadingCtrl.onLoading();
       this.cartService.addToCart(product);
       this.navCtrl.push(CartPage);
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     } else {
       this.showLogInPage();
     }

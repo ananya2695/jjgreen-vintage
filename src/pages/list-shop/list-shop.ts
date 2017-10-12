@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ShopListModel, HomeService } from "@ngcommerce/core";
 import { ShopDetailPage } from '../shop-detail/shop-detail';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the ListShopPage page.
@@ -20,7 +21,8 @@ export class ListShopPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public homeService: HomeService
+    public homeService: HomeService,
+    public loadingCtrl : LoadingProvider 
   ) {
   }
 
@@ -28,11 +30,14 @@ export class ListShopPage {
     this.getShop(this.navParams.data);
   }
   getShop(category) {
+    this.loadingCtrl.onLoading();
     this.homeService.seeAllShop(category).then((data) => {
       this.shop = data;
       console.log(this.shop);
+      this.loadingCtrl.dismiss();
     }, (err) => {
       console.log(err);
+      this.loadingCtrl.dismiss();
     });
   }
   selected(e) {

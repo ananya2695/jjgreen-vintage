@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProductListModel, HomeService } from "@ngcommerce/core";
 import { ProductDetailPage } from '../product-detail/product-detail';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the ListProductPage page.
@@ -20,7 +21,7 @@ export class ListProductPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl : LoadingProvider,
     public homeService: HomeService
   ) {
   }
@@ -30,14 +31,13 @@ export class ListProductPage {
   }
 
   getProducts(category) {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    this.loadingCtrl.onLoading();
     this.homeService.seeAllProduct(category).then((data) => {
       this.products = data;
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     }, (error) => {
       console.log(error);
-      loading.dismiss();
+      this.loadingCtrl.dismiss();
     });
   }
 
