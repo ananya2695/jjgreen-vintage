@@ -46,7 +46,7 @@ page-home {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         padding-right: 4px;
-        // background-image: url('../assets/image/x2.png');
+        background-image: url('../assets/image/x2.png');
       }
 
       
@@ -96,6 +96,13 @@ page-home {
         margin-top: 1rem !important;
         font-size: 1.8rem;
     }
+
+    #seeall{
+        color: #fff;
+        font-size: small;
+    }
+
+
     .grid {
         padding: 0px;
         margin-left: auto;
