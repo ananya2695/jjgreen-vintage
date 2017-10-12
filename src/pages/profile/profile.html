@@ -16,6 +16,6 @@
 <ion-content>
 
   <ion-form-profile [item]="userProfile" (itemClicked)="logout($event)" (notificationClicked)="notification($event)" (loginClicked)="loginModal($event)"
-    (settingProfileClicked)="editProfile($event)"></ion-form-profile>
+    (settingProfileClicked)="editProfile($event)" [isShop]="false"></ion-form-profile>
 
 </ion-content>
