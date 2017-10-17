@@ -68,8 +68,7 @@
               <span (click)="gotoListShop(segment.name)" id="seeall">see all >> </span>
             </h4>
           </ion-col>
-          <ion-col col-12 class="grid-product">
-            <!-- <ion-list-grid [items]="segment.popularshops" (itemClicked)="gotoShopDetail($event)"></ion-list-grid> -->
+          <ion-col col-12>
             <ion-background-image [items]="segment.popularshops" (itemClicked)="gotoShopDetail($event)"></ion-background-image>
           </ion-col>
         </ion-row>
