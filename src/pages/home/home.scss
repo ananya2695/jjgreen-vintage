@@ -46,7 +46,7 @@ page-home {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         padding-right: 4px;
-        background-image: url('../assets/image/x2.png');
+        
       }
 
       
@@ -119,6 +119,7 @@ page-home {
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
+        background-image: url('../assets/image/x2.png');
     }
     .col {
         position: relative;
