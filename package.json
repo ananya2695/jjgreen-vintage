@@ -60,6 +60,8 @@
                 "APP_NAME": "G-Vintage"
             }
         },
-        "platforms": []
+        "platforms": [
+            "android"
+        ]
     }
 }
