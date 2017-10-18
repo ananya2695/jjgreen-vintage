@@ -125,7 +125,7 @@ page-home {
   }
   [col-12] {
     padding: 0px;
-    margin-top: -20px;
+    // margin-top: -20px;
   }
   .grid-product {
     margin-top: -20px !important;
@@ -158,10 +158,11 @@ page-home {
     margin-top: -17px;
   }
   .grid-image {
-    padding: 10px 5px 0px 5px;
+    padding: 10px 5px 10px 5px;
+    margin-top: -25px;
     flex-wrap: wrap;
     .grid-item {
-      padding: 0px 5px 10px;
+      padding: 5px 5px 5px 5px;
       &>.double-item {
         &>.grid-item {
           padding: 5px 0px;
