@@ -77,7 +77,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     HttpModule,
     Ionic2RatingModule,
     IonicModule.forRoot(MyApp),
-    EcommerceCoreModule.forRoot('https://greenvintage-v2.herokuapp.com/api/')
+    EcommerceCoreModule.forRoot('https://greenvintage-v3.herokuapp.com/api/')
   ],
   bootstrap: [IonicApp],
   entryComponents: [
