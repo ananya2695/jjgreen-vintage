@@ -19,19 +19,23 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 export class ProfilePage {
   userProfile = {} as UserModel;
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public authenService: AuthenService
   ) {
   }
-  
-  ionViewWillEnter(){
+
+  ionViewWillEnter() {
     this.userProfile = JSON.parse(window.localStorage.getItem('jjuser'));
+    this.isSetting();
+    this.isNoti();
   }
 
   logout(e) {
     window.localStorage.removeItem('jjuser');
     this.userProfile = JSON.parse(window.localStorage.getItem('jjuser'));
+    this.isSetting();
+    this.isNoti();
   }
 
   notification(e) {
@@ -44,6 +48,24 @@ export class ProfilePage {
 
   editProfile(e) {
     this.navCtrl.push(EditProfilePage);
+  }
+
+  isSetting() {
+    let user = JSON.parse(window.localStorage.getItem('jjuser'));
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isNoti() {
+    let noti = JSON.parse(window.localStorage.getItem('onNotifications'));
+    if (noti) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

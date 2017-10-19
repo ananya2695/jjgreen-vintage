@@ -14,10 +14,15 @@
 
 
 <ion-content [ngClass]="{'ion-content-active' : cart && cart.items && cart.items.length > 0}">
-  <ion-list-cart *ngIf="cart && cart.items" [items]="cart.items" (returnItems)="returnItems($event)"></ion-list-cart>
+  <ion-list-cart *ngIf="user && cart && cart.items" [items]="cart.items" (returnItems)="returnItems($event)"></ion-list-cart>
+  <div *ngIf="!user" text-center (click)="showLogInPage()">
+    <ion-icon class="lock color-gray-lock" name="ios-lock-outline"></ion-icon>
+    <p class="color-gray-lock font-lock-size">Please login</p>
+    <p class="color-gray-lock font-lock-size">Click here to login!</p>
+  </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="user">
   <ion-toolbar>
     <div *ngIf="cart && cart.items && cart.items.length > 0">
       <ion-row class="categories-title">

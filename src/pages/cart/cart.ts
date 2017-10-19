@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CartModel, CartService } from "@ngcommerce/core";
+import { CartModel, CartService, UserModel } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
 import { LoginPage } from '../login/login';
 import { LoadingProvider } from '../../providers/loading/loading';
@@ -21,6 +21,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 export class CartPage {
 
   cart = {} as CartModel;
+  user = {} as UserModel;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,7 +33,7 @@ export class CartPage {
 
   ionViewWillEnter() {
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
-
+    this.user = user;
     if (user) {
       this.loadingCtrl.onLoading();
 
@@ -45,10 +46,6 @@ export class CartPage {
       }
 
       this.loadingCtrl.dismiss();
-    } else {
-
-      this.showLogInPage();
-
     }
 
   }
