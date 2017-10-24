@@ -144,7 +144,7 @@ export class CheckoutPage {
           bank = 'internet_banking_ktb';
         } else if (this.dataconfirm.payment.counterservice === 'SCB') {
           bank = 'internet_banking_scb';
-        } else if (this.dataconfirm.payment.counterservice === 'BKK') {
+        } else if (this.dataconfirm.payment.counterservice === 'BBL') {
           bank = 'internet_banking_bbl'; //กรุงเทพ
         } else if (this.dataconfirm.payment.counterservice === 'BAY') {
           bank = 'internet_banking_bay'; //กรุงศรี
