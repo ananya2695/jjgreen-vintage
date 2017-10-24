@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic-angular';
-import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService } from "@ngcommerce/core";
+import { CheckoutModel, PaymentModel, ListAddressModel, CartService, AddressService, PaymentService, OrderService, OmiseService } from "@ngcommerce/core";
 import { FormAddressPage } from './../form-address/form-address';
 import { CompletePage } from './../complete/complete';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { Constants } from '../../app/app.contant';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 /**
@@ -23,7 +25,11 @@ export class CheckoutPage {
   payment = {} as PaymentModel;
   shipping = {} as CheckoutModel;
   datashipping: any = {};
-  datapayment: any = {};
+  datapayment: any = {
+    payment: {}
+  };
+  omiseGenTokenRes: any = {};
+  omiseRes: any = {};
   dataconfirm: any = {};
   steps: Array<any> = [
     {
@@ -40,6 +46,7 @@ export class CheckoutPage {
     }
   ];
   currentstep: number = 1;
+  omiseKey: any = {};
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -48,11 +55,14 @@ export class CheckoutPage {
     public paymentService: PaymentService,
     public orderService: OrderService,
     public app: App,
-    public loadingCtrl : LoadingProvider 
+    public loadingCtrl: LoadingProvider,
+    public omiseServie: OmiseService,
+    private iab: InAppBrowser
   ) {
     this.getShippingData();
     this.getAddressData();
     this.getPayment();
+    this.omiseKey = Constants.OmiseKey;
   }
 
   ionViewDidLoad() {
@@ -90,27 +100,80 @@ export class CheckoutPage {
   completedShippingStep(e) {
     this.datashipping = e;
     // alert('completedShippingStep');
-    this.currentstep += 1;
+    this.currentstep = 2;
   }
 
   completedPaymentStep(e) {
     this.datapayment = e;
+    // console.log(e);
     // alert('completedPaymentStep');
-    this.currentstep += 1;
+    if (e.order.payment.paymenttype === 'credit') {
+      this.omiseServie.checkTokenByCredit(this.omiseKey, e.order.payment).then((data) => {
+        console.log(data);
+        this.omiseGenTokenRes = data;
+        this.currentstep = 3;
+      }, (err) => {
+        alert(err.message);
+        this.currentstep = 2;
+      });
+    } else {
+      this.currentstep = 3;
+    }
+
+    // this.currentstep = 3;
+
   }
 
   completedConfirmStep(e) {
     this.dataconfirm = e;
     console.log(this.dataconfirm);
     if (this.dataconfirm) {
-      this.orderService.createOrder(this.dataconfirm).then((data) => {
-        // this.navCtrl.push(CompletePage);
-        window.localStorage.setItem('order', JSON.stringify(data));
-        this.app.getRootNav().setRoot(CompletePage); // set full page
-      }, (error) => {
-        console.error(error);
-      });
+      if (this.dataconfirm.payment.paymenttype === 'credit') {
+        this.loadingCtrl.onLoading();
+        this.omiseServie.paymenyByCredit(this.omiseKey, this.omiseGenTokenRes.id, this.dataconfirm.totalamount).then((data) => {
+          this.omiseRes = data;
+          this.loadingCtrl.dismiss();
+          this.createOrder();
+        }, (err) => {
+          this.loadingCtrl.dismiss();
+          alert(JSON.stringify(err));
+        });
+      } else if (this.dataconfirm.payment.paymenttype === 'bank') {
+        let bank = '';
+        if (this.dataconfirm.payment.counterservice === 'KTB') {
+          bank = 'internet_banking_ktb';
+        } else if (this.dataconfirm.payment.counterservice === 'SCB') {
+          bank = 'internet_banking_scb';
+        } else if (this.dataconfirm.payment.counterservice === 'bangkokbank') {
+          bank = 'internet_banking_bbl'; //กรุงเทพ
+        } else if (this.dataconfirm.payment.counterservice === 'BAY') {
+          bank = 'internet_banking_bay'; //กรุงศรี
+        }
+        this.loadingCtrl.onLoading();
+        this.omiseServie.paymenyByBank(this.omiseKey, bank, this.dataconfirm.totalamount).then((data) => {
+          this.omiseRes = data;
+          this.loadingCtrl.dismiss();
+          this.iab.create(this.omiseRes.authorize_uri);
+          this.createOrder();
+        }, (err) => {
+          this.loadingCtrl.dismiss();
+          alert(JSON.stringify(err));
+        });
+      } else {
+        this.createOrder();
+      }
     }
+  }
+
+  createOrder() {
+    this.dataconfirm.omiseresponse = this.omiseRes;
+    this.orderService.createOrder(this.dataconfirm).then((data) => {
+      // this.navCtrl.push(CompletePage);
+      window.localStorage.setItem('order', JSON.stringify(data));
+      this.app.getRootNav().setRoot(CompletePage); // set full page
+    }, (error) => {
+      console.error(error);
+    });
   }
   openFormAddress(e) {
     let modal = this.modalCtrl.create(FormAddressPage);

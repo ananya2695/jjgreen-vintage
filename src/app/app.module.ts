@@ -3,11 +3,10 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent, IonFormProfileComponent, IonListCartComponent, IonListProductComponent, IonDetailProductComponent, IonFormReviewComponent, IonFormWizardComponent, IonFormWizardStepComponent, IonFormShippingComponent, IonFormPaymentComponent, IonFormConfirmComponent, IonFormPaymentOptionComponent, IonFormCreditComponent, IonFormDeliveryComponent, IonFormCounterserviceComponent, IonListShopComponent, IonDetailShopComponent, IonBackgroundImageComponent } from "@ngcommerce/core";
+import { EcommerceCoreModule, IonIconSearchbarComponent, IonListGridComponent, IonFormProfileComponent, IonListCartComponent, IonListProductComponent, IonDetailProductComponent, IonFormReviewComponent, IonFormWizardComponent, IonFormWizardStepComponent, IonFormShippingComponent, IonFormPaymentComponent, IonFormConfirmComponent, IonFormPaymentOptionComponent, IonFormCreditComponent, IonFormDeliveryComponent, IonFormCounterserviceComponent, IonListShopComponent, IonDetailShopComponent, IonBackgroundImageComponent, OmiseService } from "@ngcommerce/core";
 import { HttpModule } from "@angular/http";
 import { OneSignal } from '@ionic-native/onesignal';
 import { Facebook } from '@ionic-native/facebook';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabnavPage } from '../pages/tabnav/tabnav';
@@ -29,6 +28,7 @@ import { ShopDetailPage } from '../pages/shop-detail/shop-detail';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ListProductPage } from '../pages/list-product/list-product';
 import { LoadingProvider } from '../providers/loading/loading';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     HttpModule,
     Ionic2RatingModule,
     IonicModule.forRoot(MyApp),
-    EcommerceCoreModule.forRoot('https://greenvintage-v3.herokuapp.com/api/')
+    EcommerceCoreModule.forRoot('https://greenvintage-v2.herokuapp.com/api/')
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -106,6 +106,8 @@ import { LoadingProvider } from '../providers/loading/loading';
     SplashScreen,
     OneSignal,
     Facebook,
+    OmiseService,
+    InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoadingProvider
   ]
