@@ -2,7 +2,7 @@
     "name": "greenvintage",
     "version": "0.0.1",
     "author": "greenvintage",
-    "homepage": "https://greenvintage-v3.herokuapp.com/",
+    "homepage": "https://www.facebook.com/greenvintagenightmarket/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
