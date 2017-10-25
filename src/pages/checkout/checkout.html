@@ -15,14 +15,14 @@
 
 <ion-content>
   <ion-form-wizard [steps]="steps" [(currentstep)]="currentstep">
-      <ion-form-wizard-step [step]="1">
-          <ion-form-shipping [listaddress]="address" [listshipping]="shipping" (gotoNext)="completedShippingStep($event)" (createAddress)="openFormAddress($event)"></ion-form-shipping>
-      </ion-form-wizard-step>
-      <ion-form-wizard-step [step]="2">
-          <ion-form-payment [paymentgateway]="payment" [datashipping]="datashipping" (gotoNext)="completedPaymentStep($event)"></ion-form-payment>
-      </ion-form-wizard-step>
-      <ion-form-wizard-step [step]="3">
-          <ion-form-confirm [confirmgateway]="datapayment" (gotoNext)="completedConfirmStep($event)"></ion-form-confirm>
-      </ion-form-wizard-step>
+    <ion-form-wizard-step [step]="1">
+      <ion-form-shipping [listaddress]="address" [listshipping]="shipping" (gotoNext)="completedShippingStep($event)" (createAddress)="openFormAddress($event)"></ion-form-shipping>
+    </ion-form-wizard-step>
+    <ion-form-wizard-step [step]="2">
+      <ion-form-payment [paymentgateway]="payment" [datashipping]="datashipping" (gotoNext)="completedPaymentStep($event)"></ion-form-payment>
+    </ion-form-wizard-step>
+    <ion-form-wizard-step [step]="3">
+      <ion-form-confirm [confirmgateway]="datapayment" (gotoNext)="completedConfirmStep($event)"></ion-form-confirm>
+    </ion-form-wizard-step>
   </ion-form-wizard>
 </ion-content>

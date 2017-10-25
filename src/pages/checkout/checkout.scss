@@ -1,8 +1,14 @@
 page-checkout {
 
-    // #hContent {
-    //     height: 550px;
-    // }
+    #hContent {
+       margin-top: 110px;
+    }
+
+    #fixNav{
+        position: fixed;
+        z-index: 10;
+    }
+    
     #segmentPayment {
         opacity: 1;
         padding: 0px;
