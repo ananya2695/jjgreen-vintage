@@ -107,7 +107,7 @@ export class CheckoutPage {
     this.datapayment = e;
     // console.log(e);
     // alert('completedPaymentStep');
-    if (e.order.payment.paymenttype === 'credit') {
+    if (e.order.payment.paymenttype === 'Credit Card') {
       this.omiseServie.checkTokenByCredit(this.omiseKey, e.order.payment).then((data) => {
         console.log(data);
         this.omiseGenTokenRes = data;
@@ -128,7 +128,7 @@ export class CheckoutPage {
     this.dataconfirm = e;
     console.log(this.dataconfirm);
     if (this.dataconfirm) {
-      if (this.dataconfirm.payment.paymenttype === 'credit') {
+      if (this.dataconfirm.payment.paymenttype === 'Credit Card') {
         this.loadingCtrl.onLoading();
         this.omiseServie.paymenyByCredit(this.omiseKey, this.omiseGenTokenRes.id, this.dataconfirm.totalamount).then((data) => {
           this.omiseRes = data;
@@ -138,7 +138,7 @@ export class CheckoutPage {
           this.loadingCtrl.dismiss();
           alert(JSON.stringify(err));
         });
-      } else if (this.dataconfirm.payment.paymenttype === 'bank') {
+      } else if (this.dataconfirm.payment.paymenttype === 'Bank Transfer') {
         let bank = '';
         if (this.dataconfirm.payment.counterservice === 'KTB') {
           bank = 'internet_banking_ktb';
