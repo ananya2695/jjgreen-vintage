@@ -77,7 +77,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     HttpModule,
     Ionic2RatingModule,
     IonicModule.forRoot(MyApp, {
-      mode: 'md'
+      mode: 'ios'
     }),
     EcommerceCoreModule.forRoot('https://greenvintage-v2.herokuapp.com/api/')
   ],
