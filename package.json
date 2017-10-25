@@ -1,8 +1,8 @@
 {
     "name": "greenvintage",
     "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "author": "greenvintage",
+    "homepage": "https://greenvintage-v2.herokuapp.com/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -49,7 +49,7 @@
         "@ionic/app-scripts": "2.1.4",
         "typescript": "2.3.4"
     },
-    "description": "An Ionic project",
+    "description": "greenvintage project",
     "cordova": {
         "plugins": {
             "cordova-plugin-device": {},
