@@ -45,7 +45,7 @@
     font-style: normal;
 }
 
-[class^="icon-bank"] {
+[class*="icon-bank"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon-bank' !important;
     speak: none;
@@ -60,6 +60,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.icon-bank:before {
+    content: "\e920";    
+    color: #426135;
+    font-size: 50px
+}
 
 @font-face {
     font-family: 'icomoon-credit';
@@ -69,7 +74,7 @@
     font-style: normal;
 }
 
-[class^="icon-credit"] {
+[class*="icon-credit"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon-credit' !important;
     speak: none;
@@ -84,6 +89,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.icon-credit:before {
+    content: "\e921";    
+    color: #426135;
+    font-size: 50px
+}
 
 @font-face {
     font-family: 'icomoon-delivery';
@@ -93,7 +103,7 @@
     font-style: normal;
 }
 
-[class^="icon-delivery"] {
+[class*="icon-delivery"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon-delivery' !important;
     speak: none;
@@ -107,6 +117,11 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+.icon-delivery:before {
+    content: "\e922";    
+    color: #426135;
+    font-size: 50px
 }
 
 @font-face {
