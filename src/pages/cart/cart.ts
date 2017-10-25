@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { CartModel, CartService, UserModel } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
 import { LoginPage } from '../login/login';
@@ -26,7 +26,8 @@ export class CartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public cartService: CartService,
-    public loadingCtrl : LoadingProvider    
+    public loadingCtrl : LoadingProvider,
+    public app: App    
   ) {
 
   }
@@ -51,7 +52,7 @@ export class CartPage {
   }
 
   showLogInPage() {
-    this.navCtrl.push(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   ionViewWillLeave() {

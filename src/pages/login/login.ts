@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, Platform, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, Platform, NavController, NavParams, ViewController, App } from 'ionic-angular';
 import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterPage } from '../register/register';
@@ -31,7 +31,8 @@ export class LoginPage {
     public cartService: CartService,
     public oneSignal: OneSignal,
     public platform: Platform,
-    public loadingCtrl: LoadingProvider
+    public loadingCtrl: LoadingProvider,
+    public app: App 
   ) {
   }
 
@@ -89,7 +90,7 @@ export class LoginPage {
 
     this.cartService.getCartByUser(user._id).then((data) => {
       this.cartService.saveCartStorage(data);
-      this.navCtrl.pop();
+      this.app.getRootNav().setRoot(TabnavPage);
       this.loadingCtrl.dismiss();
     }, (error) => {
       this.loadingCtrl.dismiss();

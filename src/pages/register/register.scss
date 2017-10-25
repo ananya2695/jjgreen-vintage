@@ -63,11 +63,22 @@ page-register {
       font-weight: 500;
       text-transform: uppercase;
       color: #fff;
-      background-color: #426135;
+      background-color: #426135 !important;
      
       transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
       margin: 0.4rem 0.2rem;
       padding: 0 1.1em;
     }
+
+    .button-ios {
+      border-radius: 4px;
+      height: 2.8em;
+      font-size: 1.6rem;
+      color: #fff;
+      background-color: #5c926e;
+      /* background-color: #488aff; */
+      margin: 0.4rem 0.2rem;
+      padding: 0 1em;
+  }
 
 }
