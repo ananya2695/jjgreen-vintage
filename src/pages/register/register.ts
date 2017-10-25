@@ -45,7 +45,7 @@ export class RegisterPage {
     this.loadingCtrl.onLoading();
     this.authenService.signUp(this.signup).then((data) => {
       window.localStorage.setItem('jjuser', JSON.stringify(data));
-      this.navCtrl.push(LoginPage);
+      this.navCtrl.pop();
       this.getCartByUser();
       this.loadingCtrl.dismiss();
     }, (error) => {

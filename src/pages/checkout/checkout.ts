@@ -71,7 +71,9 @@ export class CheckoutPage {
 
   getShippingData() {
     // this.loadingCtrl.onLoading();
-    this.shipping = this.cartService.getCartStorage();
+    setTimeout(() => {
+      this.shipping = this.cartService.getCartStorage();
+    }, 1000);
     // this.loadingCtrl.dismiss();
   }
   getAddressData() {
