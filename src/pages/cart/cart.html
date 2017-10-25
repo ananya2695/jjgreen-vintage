@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<!-- <ion-content [ngClass]="{'ion-content-active' : cart && cart.items && cart.items.length > 0}"> -->
-<ion-content>
+<ion-content [ngClass]="{'ion-content-active' : cart && cart.items && cart.items.length > 0}">
+<!-- <ion-content> -->
   <ion-list-cart *ngIf="user && cart && cart.items" [items]="cart.items" (returnItems)="returnItems($event)"></ion-list-cart>
   <div *ngIf="!user" text-center (click)="showLogInPage()">
     <ion-icon class="lock color-gray-lock" name="ios-lock-outline"></ion-icon>
