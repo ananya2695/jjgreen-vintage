@@ -155,7 +155,7 @@ export class CheckoutPage {
         this.omiseServie.paymenyByBank(this.omiseKey, bank, this.dataconfirm.totalamount).then((data) => {
           this.omiseRes = data;
           this.loadingCtrl.dismiss();
-          this.iab.create(this.omiseRes.authorize_uri);
+          this.iab.create(this.omiseRes.authorize_uri, '_blank', 'location=yes');
           this.createOrder();
         }, (err) => {
           this.loadingCtrl.dismiss();
