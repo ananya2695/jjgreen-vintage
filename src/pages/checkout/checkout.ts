@@ -5,7 +5,7 @@ import { FormAddressPage } from './../form-address/form-address';
 import { CompletePage } from './../complete/complete';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { Constants } from '../../app/app.contant';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 
 /**
@@ -47,6 +47,11 @@ export class CheckoutPage {
   ];
   currentstep: number = 1;
   omiseKey: any = {};
+  options: InAppBrowserOptions = {
+    location: 'yes',//Or 'no' 
+    disallowoverscroll: 'yes',
+    enableViewportScale: 'yes'
+  };
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -155,7 +160,7 @@ export class CheckoutPage {
         this.omiseServie.paymenyByBank(this.omiseKey, bank, this.dataconfirm.totalamount).then((data) => {
           this.omiseRes = data;
           this.loadingCtrl.dismiss();
-          this.iab.create(this.omiseRes.authorize_uri, '_blank', 'location=yes');
+          this.iab.create(this.omiseRes.authorize_uri, '_blank', this.options);
           this.createOrder();
         }, (err) => {
           this.loadingCtrl.dismiss();
