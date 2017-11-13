@@ -1,4 +1,12 @@
 page-home {
+  img {
+    object-fit: cover !important;
+    height: 80px !important;
+    width: 100% !important;
+}
+#one-image{
+  height: 180px !important;
+}
   .font-jjgreen {
     margin-bottom: -108px;
     width: 100% !important;
@@ -209,7 +217,7 @@ page-home {
   .background-image {
     display: block;
     position: relative;
-    height: 100%;
+    height: 100% !important;
     background-size: cover;
     background-repeat: no-repeat;
     /* -webkit-transition: all ease-in-out .3s; */
