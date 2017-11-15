@@ -25,4 +25,8 @@ export class WritereviewPage {
     this.viewCtrl.dismiss(e);
   }
 
+  dismiss(){
+    this.viewCtrl.dismiss();
+  }
+
 }

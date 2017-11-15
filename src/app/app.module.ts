@@ -29,6 +29,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ListProductPage } from '../pages/list-product/list-product';
 import { LoadingProvider } from '../providers/loading/loading';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { MomentPipe } from '../pipes/moment/moment';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     IonDetailShopComponent,
     EditProfilePage,
     ListProductPage,
-    IonBackgroundImageComponent
+    IonBackgroundImageComponent,
+    MomentPipe
   ],
   imports: [
     BrowserModule,
