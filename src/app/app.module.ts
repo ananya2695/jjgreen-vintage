@@ -30,6 +30,9 @@ import { ListProductPage } from '../pages/list-product/list-product';
 import { LoadingProvider } from '../providers/loading/loading';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { MomentPipe } from '../pipes/moment/moment';
+import { ImagePicker } from "@ionic-native/image-picker";
+import { Base64 } from "@ionic-native/base64";
+import { IonUploadImagesComponent } from '../components/ion-upload-image/ion-upload-image';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,8 @@ import { MomentPipe } from '../pipes/moment/moment';
     EditProfilePage,
     ListProductPage,
     IonBackgroundImageComponent,
-    MomentPipe
+    MomentPipe,
+    IonUploadImagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +117,8 @@ import { MomentPipe } from '../pipes/moment/moment';
     Facebook,
     OmiseService,
     InAppBrowser,
+    ImagePicker,
+    Base64,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoadingProvider
   ]
