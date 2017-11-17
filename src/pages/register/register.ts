@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { SignupModel } from "@ngcommerce/core";
 import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { LoginPage } from '../login/login';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { TabnavPage } from '../tabnav/tabnav';
 
 /**
  * Generated class for the RegisterPage page.
@@ -20,13 +21,15 @@ import { LoadingProvider } from '../../providers/loading/loading';
 export class RegisterPage {
 
   signup = {} as SignupModel;
+  isFacebook = true;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public authenService: AuthenService,
     public loadingCtrl : LoadingProvider ,
-    public cartService: CartService
+    public cartService: CartService,
+    public app: App
   ) {
 
     if (this.navParams.data.first_name) {
@@ -34,6 +37,16 @@ export class RegisterPage {
       this.signup.lastName = this.navParams.data.last_name;
       this.signup.email = this.navParams.data.email;
       this.signup.profileImageURL = this.navParams.data.picture.data.url;
+    }
+
+    if(this.navParams.get('facebook')){
+      this.isFacebook = false;
+      this.signup.firstName = this.navParams.get('facebook').first_name;
+      this.signup.lastName = this.navParams.get('facebook').last_name;
+      this.signup.email = this.navParams.get('facebook').email;
+      this.signup.profileImageURL = this.navParams.get('facebook').picture.data.url;
+      this.signup.username = this.navParams.get('facebook').email;
+      this.signup.password = 'jjUsr#Pass1234';
     }
   }
 
@@ -45,9 +58,9 @@ export class RegisterPage {
     this.loadingCtrl.onLoading();
     this.authenService.signUp(this.signup).then((data) => {
       window.localStorage.setItem('jjuser', JSON.stringify(data));
-      this.navCtrl.pop();
       this.getCartByUser();
       this.loadingCtrl.dismiss();
+      this.app.getRootNav().setRoot(TabnavPage);
     }, (error) => {
       this.loadingCtrl.dismiss();
       alert(JSON.parse(error._body).message);

@@ -32,12 +32,12 @@
       <ion-input type="email" [(ngModel)]="signup.email"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="isFacebook">
       <ion-label floating>Username</ion-label>
       <ion-input type="text" [(ngModel)]="signup.username"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="isFacebook">
       <ion-label floating>Password</ion-label>
       <ion-input type="password" [(ngModel)]="signup.password"></ion-input>
     </ion-item>

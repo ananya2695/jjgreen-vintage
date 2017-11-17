@@ -30,6 +30,9 @@ import { ListProductPage } from '../pages/list-product/list-product';
 import { LoadingProvider } from '../providers/loading/loading';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { MomentPipe } from '../pipes/moment/moment';
+import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { CompleteServiceProvider } from '../providers/complete-service/complete-service';
+
 
 @NgModule({
   declarations: [
@@ -78,6 +81,7 @@ import { MomentPipe } from '../pipes/moment/moment';
     BrowserModule,
     HttpModule,
     Ionic2RatingModule,
+    AutoCompleteModule,
     IonicModule.forRoot(MyApp,{
       SegmentButton:'segment',
       mode: 'ios'
@@ -114,7 +118,8 @@ import { MomentPipe } from '../pipes/moment/moment';
     OmiseService,
     InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    LoadingProvider
+    LoadingProvider,
+    CompleteServiceProvider
   ]
 })
 export class AppModule { }

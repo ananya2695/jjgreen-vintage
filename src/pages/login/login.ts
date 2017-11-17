@@ -32,7 +32,7 @@ export class LoginPage {
     public oneSignal: OneSignal,
     public platform: Platform,
     public loadingCtrl: LoadingProvider,
-    public app: App 
+    public app: App
   ) {
   }
 
@@ -71,7 +71,7 @@ export class LoginPage {
         console.log('Logged into Facebook!', res);
         // this.facebookRes = JSON.stringify(res);
         this.fb.api('me?fields=id,last_name,first_name,picture,email', null).then((user: FacebookLoginResponse) => {
-          this.navCtrl.push(RegisterPage, user);
+          this.loginWithFacebook(user);
         })
           .catch(e => {
             alert(JSON.stringify(e));
@@ -83,6 +83,34 @@ export class LoginPage {
 
 
     this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+  }
+
+  loginWithFacebook(resdata) {
+    let user = {
+      username: resdata.email,
+      password: 'jjUsr#Pass1234'
+    }
+
+    this.loadingCtrl.onLoading();
+    this.authenService.signIn(user).then((data) => {
+      console.log(data);
+      window.localStorage.setItem('jjuser', JSON.stringify(data));
+
+      this.getCartByUser();
+
+      if (this.platform.is('cordova')) {
+
+        this.oneSignal.getIds().then((data) => {
+          this.authenService.pushNotificationUser({ id: data.userId });
+        });
+
+      }
+    }, (error) => {
+      // alert(JSON.parse(error._body).message);
+      this.loadingCtrl.dismiss();
+      this.navCtrl.push(RegisterPage, { facebook: resdata });
+    });
+
   }
 
   getCartByUser() {
