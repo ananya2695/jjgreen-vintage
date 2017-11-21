@@ -28,23 +28,23 @@
   <ion-list>
 
     <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="user.username"></ion-input>
+      <ion-label floating>Phone Number</ion-label>
+      <ion-input type="text" [(ngModel)]="tel"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label floating>Password</ion-label>
       <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-    </ion-item>
+    </ion-item> -->
 
   </ion-list>
   <ion-row>
     <ion-col>
-      <button id="btnlogin" ion-button block (click)="login(user)">Login</button>
+      <button [disabled]="tel === ''" id="btnlogin" ion-button block (click)="login(tel)">Login</button>
     </ion-col>
-    <ion-col>
+    <!-- <ion-col>
       <button id="btnregister" ion-button block (click)="register()">Register</button>
-    </ion-col>
+    </ion-col> -->
   </ion-row>
   <ion-row>
     <ion-col>

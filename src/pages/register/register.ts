@@ -5,6 +5,8 @@ import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { LoginPage } from '../login/login';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { TabnavPage } from '../tabnav/tabnav';
+import { RegisterModel } from './register.model';
+import { RegisterProvider } from '../../providers/register/register';
 
 /**
  * Generated class for the RegisterPage page.
@@ -20,16 +22,17 @@ import { TabnavPage } from '../tabnav/tabnav';
 })
 export class RegisterPage {
 
-  signup = {} as SignupModel;
-  isFacebook = true;
+  signup: RegisterModel = new RegisterModel();
+  isEmail = true;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public authenService: AuthenService,
-    public loadingCtrl : LoadingProvider ,
+    public loadingCtrl: LoadingProvider,
     public cartService: CartService,
-    public app: App
+    public app: App,
+    public registerProvider: RegisterProvider
   ) {
 
     if (this.navParams.data.first_name) {
@@ -39,8 +42,15 @@ export class RegisterPage {
       this.signup.profileImageURL = this.navParams.data.picture.data.url;
     }
 
-    if(this.navParams.get('facebook')){
-      this.isFacebook = false;
+    if (this.navParams.get('tel')) {
+      this.signup.username = this.navParams.get('tel');
+      this.signup.password = 'jjUsr#Pass1234';
+      this.signup.tel = this.navParams.get('tel');
+      console.log(this.signup);
+    }
+
+    if (this.navParams.get('facebook')) {
+      this.isEmail = false;
       this.signup.firstName = this.navParams.get('facebook').first_name;
       this.signup.lastName = this.navParams.get('facebook').last_name;
       this.signup.email = this.navParams.get('facebook').email;
@@ -56,10 +66,11 @@ export class RegisterPage {
 
   onRegister() {
     this.loadingCtrl.onLoading();
-    this.authenService.signUp(this.signup).then((data) => {
+    this.registerProvider.regisAndAddress(this.signup).then((data) => {
       window.localStorage.setItem('jjuser', JSON.stringify(data));
       this.getCartByUser();
       this.loadingCtrl.dismiss();
+      window.localStorage.setItem('selectedTab', '2');
       this.app.getRootNav().setRoot(TabnavPage);
     }, (error) => {
       this.loadingCtrl.dismiss();

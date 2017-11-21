@@ -36,6 +36,7 @@ import { CompleteServiceProvider } from '../providers/complete-service/complete-
 import { ImagePicker } from "@ionic-native/image-picker";
 import { Base64 } from "@ionic-native/base64";
 import { IonUploadImagesComponent } from '../components/ion-upload-image/ion-upload-image';
+import { RegisterProvider } from '../providers/register/register';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { IonUploadImagesComponent } from '../components/ion-upload-image/ion-upl
     Base64,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoadingProvider,
-    CompleteServiceProvider
+    CompleteServiceProvider,
+    RegisterProvider
   ]
 })
 export class AppModule { }

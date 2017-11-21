@@ -28,18 +28,38 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>E-mail</ion-label>
+      <ion-label floating>Tel</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.tel"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="isEmail">
+      <ion-label floating>Email</ion-label>
       <ion-input type="email" [(ngModel)]="signup.email"></ion-input>
     </ion-item>
-
-    <ion-item *ngIf="isFacebook">
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="signup.username"></ion-input>
+    
+    <ion-item>
+      <ion-label floating>Address</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.address"></ion-input>
     </ion-item>
 
-    <ion-item *ngIf="isFacebook">
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="signup.password"></ion-input>
+    <ion-item>
+      <ion-label floating>Subdistrict</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.subdistrict"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>District</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.district"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Province</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.province"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Postcode</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.postcode"></ion-input>
     </ion-item>
 
   </ion-list>

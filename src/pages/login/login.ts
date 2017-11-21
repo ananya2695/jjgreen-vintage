@@ -22,6 +22,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 })
 export class LoginPage {
   user = {} as UserModel;
+  tel: string = '';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -40,12 +41,17 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login(user) {
+  login(data) {
     this.loadingCtrl.onLoading();
+    let user = {
+      username: data,
+      password: 'jjUsr#Pass1234'
+    }
     this.authenService.signIn(user).then((data) => {
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
-
+      window.localStorage.setItem('selectedTab', '2');
+      
       this.getCartByUser();
 
       if (this.platform.is('cordova')) {
@@ -56,8 +62,9 @@ export class LoginPage {
 
       }
     }, (error) => {
-      alert(JSON.parse(error._body).message);
+      // alert(JSON.parse(error._body).message);
       this.loadingCtrl.dismiss();
+      this.navCtrl.push(RegisterPage, { tel: data });
     });
   }
 
@@ -95,7 +102,8 @@ export class LoginPage {
     this.authenService.signIn(user).then((data) => {
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
-
+      window.localStorage.setItem('selectedTab', '2');
+      
       this.getCartByUser();
 
       if (this.platform.is('cordova')) {

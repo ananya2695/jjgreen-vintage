@@ -32,7 +32,7 @@ export class MyApp {
         this.onSignalSetup();
       }
     });
-
+    window.localStorage.setItem('selectedTab', '0');
     this.getUser();
     this.configFirebase();
   }
