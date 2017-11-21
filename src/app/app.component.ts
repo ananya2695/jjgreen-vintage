@@ -9,7 +9,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
 
 import { CartService } from "@ngcommerce/core";
-
+import * as firebase from 'firebase';
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,6 +34,7 @@ export class MyApp {
     });
 
     this.getUser();
+    this.configFirebase();
   }
 
   getUser() {
@@ -52,6 +53,17 @@ export class MyApp {
     }, (error) => {
       window.localStorage.removeItem('jjuser');
     });
+  }
+  configFirebase() {
+    let config = {
+      apiKey: "AIzaSyActRoM7SJW0h20HTM9GrkwJICC4moOzC8",
+      authDomain: "green-vintage.firebaseapp.com",
+      databaseURL: "https://green-vintage.firebaseio.com",
+      projectId: "green-vintage",
+      storageBucket: "green-vintage.appspot.com",
+      messagingSenderId: "317596581774"
+    };
+    firebase.initializeApp(config);
   }
 
   onSignalSetup() {

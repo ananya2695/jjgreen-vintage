@@ -33,6 +33,9 @@ import { MomentPipe } from '../pipes/moment/moment';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { CompleteServiceProvider } from '../providers/complete-service/complete-service';
 
+import { ImagePicker } from "@ionic-native/image-picker";
+import { Base64 } from "@ionic-native/base64";
+import { IonUploadImagesComponent } from '../components/ion-upload-image/ion-upload-image';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,8 @@ import { CompleteServiceProvider } from '../providers/complete-service/complete-
     EditProfilePage,
     ListProductPage,
     IonBackgroundImageComponent,
-    MomentPipe
+    MomentPipe,
+    IonUploadImagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,6 +121,8 @@ import { CompleteServiceProvider } from '../providers/complete-service/complete-
     Facebook,
     OmiseService,
     InAppBrowser,
+    ImagePicker,
+    Base64,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoadingProvider,
     CompleteServiceProvider
