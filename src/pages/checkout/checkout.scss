@@ -57,7 +57,12 @@ page-checkout {
         max-width: 40px !important;
        
     }
-
+    .button-ios-danger.activated {
+        background-color: #5c926e;
+    }
+    .button-ios.activated {
+        background-color: #5c926e;
+    }
     .button {
         color: #fff;
         background-color: #5c926e;

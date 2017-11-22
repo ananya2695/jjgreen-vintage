@@ -40,11 +40,16 @@ export class EditProfilePage {
   }
   resImageEvent(e) {
     this.resImg = e[0] ? e[0] : "";
+    if(this.resImg){
+      this.editProfile.profileImageURL = this.resImg;
+    }else{
+      this.editProfile.profileImageURL = '';
+    }
   }
 
   editAccount() {
     this.loadingCtrl.onLoading();
-    this.editProfile.profileImageURL = this.resImg;
+    this.editProfile.profileImageURL = this.editProfile.profileImageURL;
     this.authenService.updateUser(this.editProfile).then((resp) => {
       window.localStorage.setItem('jjuser', JSON.stringify(resp));
       this.navCtrl.pop();

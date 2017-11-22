@@ -35,8 +35,8 @@
     <ion-input type="text" value="{{editProfile.lastName}}" [(ngModel)]="editProfile.lastName"></ion-input>
   </ion-item>
   <div>
-    <button ion-button block (click)="editAccount()">Save</button>
-    <button ion-button block (click)="changePassword()">Change Password</button>
+    <button ion-button block color="header-cs" (click)="editAccount()" [disabled]="!editProfile.firstName || !editProfile.lastName || !editProfile.profileImageURL">Save</button>
+    <button ion-button block color="header-cs" (click)="changePassword()">Change Password</button>
 
   </div>
 </ion-content>
