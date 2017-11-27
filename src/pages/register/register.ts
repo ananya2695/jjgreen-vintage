@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Platform } from 'ionic-angular';
 import { SignupModel } from "@ngcommerce/core";
 import { UserModel, AuthenService, CartService } from "@ngcommerce/core";
 import { LoginPage } from '../login/login';
@@ -7,6 +7,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterModel } from './register.model';
 import { RegisterProvider } from '../../providers/register/register';
+import { OneSignal } from '@ionic-native/onesignal';
 
 /**
  * Generated class for the RegisterPage page.
@@ -32,7 +33,9 @@ export class RegisterPage {
     public loadingCtrl: LoadingProvider,
     public cartService: CartService,
     public app: App,
-    public registerProvider: RegisterProvider
+    public registerProvider: RegisterProvider,
+    public oneSignal: OneSignal,
+    public platform: Platform,
   ) {
 
     // if (this.navParams.data.first_name) {
@@ -79,6 +82,14 @@ export class RegisterPage {
           this.createCart(cart);
         }
       }
+
+      if (this.platform.is('cordova')) {
+
+        this.oneSignal.getIds().then((data) => {
+          this.authenService.pushNotificationUser({ id: data.userId });
+        });
+
+      }
       this.loadingCtrl.dismiss();
       window.localStorage.setItem('selectedTab', '2');
       this.app.getRootNav().setRoot(TabnavPage);
@@ -116,7 +127,7 @@ export class RegisterPage {
     this.cartService.updateCart(cart).then((data) => {
       console.log('update success.');
       this.cartService.saveCartStorage(data);
-      this.getCartByUser();      
+      this.getCartByUser();
     }, (error) => {
       alert(JSON.parse(error._body).message);
       // this.navCtrl.push(LoginPage);
