@@ -39,6 +39,7 @@ export class RegisterPage {
       this.signup.firstName = this.navParams.data.first_name;
       this.signup.lastName = this.navParams.data.last_name;
       this.signup.email = this.navParams.data.email;
+      this.signup.password = 'jjUsr#Pass1234';      
       this.signup.profileImageURL = this.navParams.data.picture.data.url;
     }
 
