@@ -39,7 +39,7 @@ export class RegisterPage {
       this.signup.firstName = this.navParams.data.first_name;
       this.signup.lastName = this.navParams.data.last_name;
       this.signup.email = this.navParams.data.email;
-      this.signup.password = 'jjUsr#Pass1234';      
+      this.signup.password = 'jjUsr#Pass1234';
       this.signup.profileImageURL = this.navParams.data.picture.data.url;
     }
 
@@ -69,7 +69,16 @@ export class RegisterPage {
     this.loadingCtrl.onLoading();
     this.registerProvider.regisAndAddress(this.signup).then((data) => {
       window.localStorage.setItem('jjuser', JSON.stringify(data));
-      this.getCartByUser();
+      let cart = this.cartService.getCartStorage();
+      let user = JSON.parse(window.localStorage.getItem('jjuser'));
+
+      if (user) {
+        if (cart && cart._id) {
+          this.updateCart(cart);
+        } else {
+          this.createCart(cart);
+        }
+      }
       this.loadingCtrl.dismiss();
       window.localStorage.setItem('selectedTab', '2');
       this.app.getRootNav().setRoot(TabnavPage);
@@ -86,6 +95,31 @@ export class RegisterPage {
       this.cartService.saveCartStorage(data);
     }, (error) => {
 
+    });
+  }
+
+  createCart(cart) {
+    // this.loadingCtrl.onLoading();
+    this.cartService.createCart(cart).then((data) => {
+      console.log('create success.');
+      this.cartService.saveCartStorage(data);
+      this.getCartByUser();
+      // this.loadingCtrl.dismiss();
+    }, (error) => {
+      // this.loadingCtrl.dismiss();
+      alert(JSON.parse(error._body).message);
+    });
+
+  }
+
+  updateCart(cart) {
+    this.cartService.updateCart(cart).then((data) => {
+      console.log('update success.');
+      this.cartService.saveCartStorage(data);
+      this.getCartByUser();      
+    }, (error) => {
+      alert(JSON.parse(error._body).message);
+      // this.navCtrl.push(LoginPage);
     });
   }
 

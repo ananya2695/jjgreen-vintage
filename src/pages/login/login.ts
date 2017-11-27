@@ -51,8 +51,17 @@ export class LoginPage {
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
       window.localStorage.setItem('selectedTab', '2');
+      let cart = this.cartService.getCartStorage();
+      let user = JSON.parse(window.localStorage.getItem('jjuser'));
+  
+      if (user) {
+        if (cart && cart._id) {
+          this.updateCart(cart);
+        } else {
+          this.createCart(cart);
+        }
+      }
       
-      this.getCartByUser();
 
       if (this.platform.is('cordova')) {
 
@@ -67,6 +76,32 @@ export class LoginPage {
       this.navCtrl.push(RegisterPage, { tel: data });
     });
   }
+
+  createCart(cart) {
+    // this.loadingCtrl.onLoading();
+    this.cartService.createCart(cart).then((data) => {
+      console.log('create success.');
+      this.cartService.saveCartStorage(data);
+      this.getCartByUser();
+      // this.loadingCtrl.dismiss();
+    }, (error) => {
+      // this.loadingCtrl.dismiss();
+      alert(JSON.parse(error._body).message);
+    });
+
+  }
+
+  updateCart(cart) {
+    this.cartService.updateCart(cart).then((data) => {
+      console.log('update success.');
+      this.cartService.saveCartStorage(data);
+      this.getCartByUser();      
+    }, (error) => {
+      alert(JSON.parse(error._body).message);
+      // this.navCtrl.push(LoginPage);
+    });
+  }
+
 
   register() {
     this.navCtrl.push(RegisterPage);
@@ -104,7 +139,16 @@ export class LoginPage {
       window.localStorage.setItem('jjuser', JSON.stringify(data));
       window.localStorage.setItem('selectedTab', '2');
       
-      this.getCartByUser();
+      let cart = this.cartService.getCartStorage();
+      let user = JSON.parse(window.localStorage.getItem('jjuser'));
+  
+      if (user) {
+        if (cart && cart._id) {
+          this.updateCart(cart);
+        } else {
+          this.createCart(cart);
+        }
+      }
 
       if (this.platform.is('cordova')) {
 

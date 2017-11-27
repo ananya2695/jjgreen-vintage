@@ -100,7 +100,10 @@ export class ProductDetailPage {
       this.navCtrl.push(CartPage);
       this.loadingCtrl.dismiss();
     } else {
+      this.loadingCtrl.onLoading();
+      this.cartService.addToCart(product);
       this.showLogInPage();
+      this.loadingCtrl.dismiss();      
     }
   }
 

@@ -39,6 +39,7 @@ export class CartPage {
       this.loadingCtrl.onLoading();
 
       let cartStorage = this.cartService.getCartStorage();
+      console.log(cartStorage);
       if (cartStorage) {
         if (cartStorage.items && cartStorage.items.length > 0) {
           this.cart = cartStorage;
