@@ -91,8 +91,6 @@ export class RegisterPage {
 
       }
       this.loadingCtrl.dismiss();
-      window.localStorage.setItem('selectedTab', '2');
-      this.app.getRootNav().setRoot(TabnavPage);
     }, (error) => {
       this.loadingCtrl.dismiss();
       alert(JSON.parse(error._body).message);
@@ -104,6 +102,8 @@ export class RegisterPage {
 
     this.cartService.getCartByUser(user._id).then((data) => {
       this.cartService.saveCartStorage(data);
+      window.localStorage.setItem('selectedTab', '2');
+      this.app.getRootNav().setRoot(TabnavPage);
     }, (error) => {
 
     });

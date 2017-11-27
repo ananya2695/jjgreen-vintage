@@ -29,7 +29,7 @@ export class ProductDetailPage {
     public favoriteService: FavoriteService,
     public modalCtrl: ModalController,
     public cartService: CartService,
-    public loadingCtrl : LoadingProvider 
+    public loadingCtrl: LoadingProvider
   ) {
     // this.product = this.navParams.data;
     this.init();
@@ -93,7 +93,7 @@ export class ProductDetailPage {
 
   addToCart(product) {
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
-
+    window.localStorage.setItem('jjProduct', JSON.stringify(product));
     if (user) {
       this.loadingCtrl.onLoading();
       this.cartService.addToCart(product);
@@ -103,7 +103,7 @@ export class ProductDetailPage {
       this.loadingCtrl.onLoading();
       this.cartService.addToCart(product);
       this.showLogInPage();
-      this.loadingCtrl.dismiss();      
+      this.loadingCtrl.dismiss();
     }
   }
 

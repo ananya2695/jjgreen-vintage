@@ -26,28 +26,48 @@ export class CartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public cartService: CartService,
-    public loadingCtrl : LoadingProvider,
-    public app: App    
+    public loadingCtrl: LoadingProvider,
+    public app: App
   ) {
 
   }
 
   ionViewWillEnter() {
     let user = JSON.parse(window.localStorage.getItem('jjuser'));
+    let product = JSON.parse(window.localStorage.getItem('jjProduct'));
     this.user = user;
     if (user) {
       this.loadingCtrl.onLoading();
+      if (product) {
+        this.cartService.getCartByUser(user._id).then((data) => {
+          this.cartService.saveCartStorage(data);
+          this.cartService.addToCart(product);
+          window.localStorage.removeItem('jjProduct');
+          let cartStorage = this.cartService.getCartStorage();
+          if (cartStorage) {
+            if (cartStorage.items && cartStorage.items.length > 0) {
+              this.cart = cartStorage;
+              this.onCalculate();
+            }
+          }
 
-      let cartStorage = this.cartService.getCartStorage();
-      console.log(cartStorage);
-      if (cartStorage) {
-        if (cartStorage.items && cartStorage.items.length > 0) {
-          this.cart = cartStorage;
-          this.onCalculate();
+          this.loadingCtrl.dismiss();
+        }, (err) => {
+          console.log(err);
+          this.loadingCtrl.dismiss();
+        });
+      } else {
+        let cartStorage = this.cartService.getCartStorage();
+        if (cartStorage) {
+          if (cartStorage.items && cartStorage.items.length > 0) {
+            this.cart = cartStorage;
+            this.onCalculate();
+          }
         }
+
+        this.loadingCtrl.dismiss();
       }
 
-      this.loadingCtrl.dismiss();
     }
 
   }
