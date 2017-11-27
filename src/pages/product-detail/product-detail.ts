@@ -96,12 +96,12 @@ export class ProductDetailPage {
     window.localStorage.setItem('jjProduct', JSON.stringify(product));
     if (user) {
       this.loadingCtrl.onLoading();
-      this.cartService.addToCart(product);
+      // this.cartService.addToCart(product);
       this.navCtrl.push(CartPage);
       this.loadingCtrl.dismiss();
     } else {
       this.loadingCtrl.onLoading();
-      this.cartService.addToCart(product);
+      // this.cartService.addToCart(product);
       this.showLogInPage();
       this.loadingCtrl.dismiss();
     }
