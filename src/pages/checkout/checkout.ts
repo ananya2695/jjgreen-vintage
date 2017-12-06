@@ -6,6 +6,7 @@ import { CompletePage } from './../complete/complete';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { Constants } from '../../app/app.contant';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { Dialogs } from '@ionic-native/dialogs';
 
 
 /**
@@ -62,7 +63,8 @@ export class CheckoutPage {
     public app: App,
     public loadingCtrl: LoadingProvider,
     public omiseServie: OmiseService,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private dialogs: Dialogs
   ) {
     this.getShippingData();
     this.getAddressData();
@@ -119,7 +121,7 @@ export class CheckoutPage {
         this.omiseGenTokenRes = data;
         this.currentstep = 3;
       }, (err) => {
-        alert(err.message);
+        this.dialogs.alert(JSON.parse(err._body).message, 'Checkout');
         this.currentstep = 2;
       });
     } else {
@@ -164,7 +166,8 @@ export class CheckoutPage {
           this.createOrder();
         }, (err) => {
           this.loadingCtrl.dismiss();
-          alert(JSON.stringify(err));
+          this.dialogs.alert(JSON.parse(err._body).message, 'Checkout');
+
         });
       } else {
         this.createOrder();

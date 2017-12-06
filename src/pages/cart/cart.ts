@@ -4,6 +4,8 @@ import { CartModel, CartService, UserModel } from "@ngcommerce/core";
 import { CheckoutPage } from './../checkout/checkout';
 import { LoginPage } from '../login/login';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { Dialogs } from '@ionic-native/dialogs';
+
 
 
 /**
@@ -27,7 +29,8 @@ export class CartPage {
     public navParams: NavParams,
     public cartService: CartService,
     public loadingCtrl: LoadingProvider,
-    public app: App
+    public app: App,
+    private dialogs: Dialogs
   ) {
 
   }
@@ -99,7 +102,7 @@ export class CartPage {
       // this.loadingCtrl.dismiss();
     }, (error) => {
       // this.loadingCtrl.dismiss();
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message, 'Cart');
     });
 
   }
@@ -109,7 +112,7 @@ export class CartPage {
       console.log('update success.');
       this.cartService.saveCartStorage(data);
     }, (error) => {
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message, 'Cart');
       this.navCtrl.push(LoginPage);
     });
   }

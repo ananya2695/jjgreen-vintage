@@ -32,4 +32,7 @@ $ npm install --save @ionic-native/facebook
 $ ionic cordova plugin add onesignal-cordova-plugin
 $ npm install --save @ionic-native/onesignal
 
+$ ionic cordova plugin add cordova-plugin-dialogs
+$ npm install --save @ionic-native/dialogs
+
 
