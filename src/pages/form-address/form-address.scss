@@ -1,4 +1,28 @@
 page-form-address {
+    .validation-errors {
+        .error-message {
+            color: color($colors, danger);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.6rem;
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 10px;
+            &:first-child {
+                margin-top: 10px;
+            }
+            &::before {
+                font-family: "Ionicons";
+                content: "\f19f";
+                font-size: 18px;
+                width: 16px;
+                height: 16px;
+                text-align: center;
+                position: absolute;
+                left: 0px;
+            }
+        }
+    }
     .button-ios {
         border-radius: 4px;
         height: 2.8em;
@@ -10,7 +34,6 @@ page-form-address {
         padding: 0 1em;
     }
     ion-auto-complete {
-        width: 90vw;
-        // height: 50vw;
-      }
+        width: 90vw; // height: 50vw;
+    }
 }
