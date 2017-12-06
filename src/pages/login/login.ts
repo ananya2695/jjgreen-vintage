@@ -7,6 +7,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 import { OneSignal } from '@ionic-native/onesignal';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { Dialogs } from '@ionic-native/dialogs';
 
 /**
  * Generated class for the LoginPage page.
@@ -33,7 +34,8 @@ export class LoginPage {
     public oneSignal: OneSignal,
     public platform: Platform,
     public loadingCtrl: LoadingProvider,
-    public app: App
+    public app: App,
+    private dialogs: Dialogs
   ) {
   }
 
@@ -53,7 +55,7 @@ export class LoginPage {
       window.localStorage.setItem('selectedTab', '2');
       let cart = this.cartService.getCartStorage();
       let user = JSON.parse(window.localStorage.getItem('jjuser'));
-  
+
       if (user) {
         if (cart && cart._id) {
           this.updateCart(cart);
@@ -61,7 +63,7 @@ export class LoginPage {
           this.createCart(cart);
         }
       }
-      
+
 
       if (this.platform.is('cordova')) {
 
@@ -86,7 +88,8 @@ export class LoginPage {
       // this.loadingCtrl.dismiss();
     }, (error) => {
       // this.loadingCtrl.dismiss();
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message, 'Login');
+
     });
 
   }
@@ -95,9 +98,10 @@ export class LoginPage {
     this.cartService.updateCart(cart).then((data) => {
       console.log('update success.');
       this.cartService.saveCartStorage(data);
-      this.getCartByUser();      
+      this.getCartByUser();
     }, (error) => {
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message, 'Login');
+
       // this.navCtrl.push(LoginPage);
     });
   }
@@ -116,12 +120,12 @@ export class LoginPage {
           this.loginWithFacebook(user);
         })
           .catch(e => {
-            alert(JSON.stringify(e));
+            this.dialogs.alert(JSON.stringify(e), 'Login');
           })
 
       })
 
-      .catch(e => alert('Error logging into Facebook ' + JSON.stringify(e)));
+      .catch(e => this.dialogs.alert('Error logging into Facebook ' + JSON.stringify(e), 'Login'));
 
 
     this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
@@ -138,10 +142,10 @@ export class LoginPage {
       console.log(data);
       window.localStorage.setItem('jjuser', JSON.stringify(data));
       window.localStorage.setItem('selectedTab', '2');
-      
+
       let cart = this.cartService.getCartStorage();
       let user = JSON.parse(window.localStorage.getItem('jjuser'));
-  
+
       if (user) {
         if (cart && cart._id) {
           this.updateCart(cart);

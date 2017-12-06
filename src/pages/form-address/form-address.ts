@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { AddressModel } from "@ngcommerce/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CompleteServiceProvider } from '../../providers/complete-service/complete-service';
+import { Dialogs } from '@ionic-native/dialogs';
 
 /**
  * Generated class for the FormAddressPage page.
@@ -23,7 +24,8 @@ export class FormAddressPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public viewCtrl: ViewController,
-    public completeServiceProvider: CompleteServiceProvider
+    public completeServiceProvider: CompleteServiceProvider,
+    private dialogs:Dialogs
   ) {
   }
 
@@ -40,7 +42,7 @@ export class FormAddressPage {
   }
 
   submit(): void {
-    alert(JSON.stringify(this.myForm.value.country));
+    this.dialogs.alert(JSON.stringify(this.myForm.value.country),'Form Address');
     // let country = this.myForm.value.country;
   }
 

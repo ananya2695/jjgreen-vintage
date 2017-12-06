@@ -63,7 +63,7 @@ export class IonUploadImagesComponent {
         }, (error) => {
           loading[loadingCount].dismiss();
           loadingCount++;
-          alert('Upload Fail. ' + JSON.stringify(error));
+          // alert('Upload Fail. ' + JSON.stringify(error));
         })
       }
 

@@ -8,6 +8,7 @@ import { TabnavPage } from '../tabnav/tabnav';
 import { RegisterModel } from './register.model';
 import { RegisterProvider } from '../../providers/register/register';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Dialogs } from '@ionic-native/dialogs';
 
 /**
  * Generated class for the RegisterPage page.
@@ -36,6 +37,7 @@ export class RegisterPage {
     public registerProvider: RegisterProvider,
     public oneSignal: OneSignal,
     public platform: Platform,
+    private dialogs:Dialogs
   ) {
 
     // if (this.navParams.data.first_name) {
@@ -93,7 +95,7 @@ export class RegisterPage {
       this.loadingCtrl.dismiss();
     }, (error) => {
       this.loadingCtrl.dismiss();
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message,'Register');
     });
   }
 
@@ -118,7 +120,8 @@ export class RegisterPage {
       // this.loadingCtrl.dismiss();
     }, (error) => {
       // this.loadingCtrl.dismiss();
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message,'Register');
+      
     });
 
   }
@@ -129,7 +132,7 @@ export class RegisterPage {
       this.cartService.saveCartStorage(data);
       this.getCartByUser();
     }, (error) => {
-      alert(JSON.parse(error._body).message);
+      this.dialogs.alert(JSON.parse(error._body).message,'Register');
       // this.navCtrl.push(LoginPage);
     });
   }
