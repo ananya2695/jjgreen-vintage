@@ -1,7 +1,8 @@
 page-form-address {
     .validation-errors {
         .error-message {
-            color: color($colors, danger);
+            // color: color($colors, danger);
+            color: #B04D5D;
             font-size: 12px;
             font-weight: 500;
             line-height: 1.6rem;
