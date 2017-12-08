@@ -10,14 +10,14 @@ import { AutoCompleteService } from 'ionic2-auto-complete';
 */
 @Injectable()
 export class CompleteServiceProvider implements AutoCompleteService {
-  labelAttribute = "name";
-  formValueAttribute = "postcode";
+  labelAttribute = "postcode";
+  // formValueAttribute = "postcode";
   constructor(public http: Http) {
     console.log('Hello CompleteServiceProvider Provider');
   }
   getResults(keyword: string) {
-    console.log(keyword.toString().length);
-    if(keyword.toString().length == 5){
+    // console.log(keyword.toString().length);
+    if(keyword.toString().length >= 4){
       return this.http.get("./assets/json/postcode.json")
       .map(
       result => {
@@ -30,6 +30,6 @@ export class CompleteServiceProvider implements AutoCompleteService {
   }
 
   getItemLabel(country: any) {
-    return country.postcode + ' (' + country.firstname + ')'
+    return country.postcode;
   }
 }

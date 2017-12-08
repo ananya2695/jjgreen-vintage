@@ -36,11 +36,18 @@
       <ion-label floating>Email</ion-label>
       <ion-input type="email" [(ngModel)]="signup.email"></ion-input>
     </ion-item>
-    
-    <ion-item>
-      <ion-label floating>Address</ion-label>
-      <ion-input type="text" [(ngModel)]="signup.address"></ion-input>
-    </ion-item>
+
+    <div class="header-address">
+      <ion-item-divider color="light">ค้นหาที่อยู่ด้วยรหัสไปร์ษณีย์</ion-item-divider>
+    </div>
+
+    <div class="div-postcode">
+      <ng-template #withFlags let-attrs="attrs">
+        <span>{{ attrs.data.postcode }} {{ attrs.data.subdistrict }} {{ attrs.data.district }} {{ attrs.data.province }} </span>
+      </ng-template>
+      <ion-auto-complete (ionAutoInput)="autoInput($event)" (itemSelected)="selectPostcode($event)"
+        [template]="withFlags" [dataProvider]="completeServiceProvider" [options]="{ placeholder : 'รหัสไปร์ษณีย์'}" #searchbar></ion-auto-complete>
+    </div>
 
     <ion-item>
       <ion-label floating>Subdistrict</ion-label>
@@ -57,9 +64,14 @@
       <ion-input type="text" [(ngModel)]="signup.province"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label floating>Postcode</ion-label>
       <ion-input type="text" [(ngModel)]="signup.postcode"></ion-input>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-label floating>Address</ion-label>
+      <ion-input type="text" [(ngModel)]="signup.address"></ion-input>
     </ion-item>
 
   </ion-list>

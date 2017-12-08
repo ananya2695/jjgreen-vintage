@@ -9,6 +9,7 @@ import { RegisterModel } from './register.model';
 import { RegisterProvider } from '../../providers/register/register';
 import { OneSignal } from '@ionic-native/onesignal';
 import { Dialogs } from '@ionic-native/dialogs';
+import { CompleteServiceProvider } from '../../providers/complete-service/complete-service';
 
 /**
  * Generated class for the RegisterPage page.
@@ -26,6 +27,13 @@ export class RegisterPage {
 
   signup: RegisterModel = new RegisterModel();
   isEmail = true;
+  postcode: any = {
+    locationcode: "",
+    subdistrict: "",
+    district: "",
+    province: "",
+    postcode: ""
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -37,7 +45,8 @@ export class RegisterPage {
     public registerProvider: RegisterProvider,
     public oneSignal: OneSignal,
     public platform: Platform,
-    private dialogs:Dialogs
+    private dialogs: Dialogs,
+    public completeServiceProvider: CompleteServiceProvider
   ) {
 
     // if (this.navParams.data.first_name) {
@@ -95,7 +104,7 @@ export class RegisterPage {
       this.loadingCtrl.dismiss();
     }, (error) => {
       this.loadingCtrl.dismiss();
-      this.dialogs.alert(JSON.parse(error._body).message,'Register');
+      this.dialogs.alert(JSON.parse(error._body).message, 'Register');
     });
   }
 
@@ -120,8 +129,8 @@ export class RegisterPage {
       // this.loadingCtrl.dismiss();
     }, (error) => {
       // this.loadingCtrl.dismiss();
-      this.dialogs.alert(JSON.parse(error._body).message,'Register');
-      
+      this.dialogs.alert(JSON.parse(error._body).message, 'Register');
+
     });
 
   }
@@ -132,9 +141,21 @@ export class RegisterPage {
       this.cartService.saveCartStorage(data);
       this.getCartByUser();
     }, (error) => {
-      this.dialogs.alert(JSON.parse(error._body).message,'Register');
+      this.dialogs.alert(JSON.parse(error._body).message, 'Register');
       // this.navCtrl.push(LoginPage);
     });
   }
+  selectPostcode(e) {
+    this.signup.postcode = e.postcode;
+    this.signup.subdistrict = e.subdistrict;
+    this.signup.district = e.district;
+    this.signup.province = e.province;
+  }
 
+  autoInput(e) {
+    this.signup.postcode = '';
+    this.signup.subdistrict = '';
+    this.signup.district = '';
+    this.signup.province = '';
+  }
 }

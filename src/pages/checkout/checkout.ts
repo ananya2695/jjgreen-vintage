@@ -188,15 +188,15 @@ export class CheckoutPage {
   openFormAddress(e) {
     let modal = this.modalCtrl.create(FormAddressPage);
     modal.onDidDismiss(data => {
-      this.loadingCtrl.onLoading();
-      this.addressService.createAddress(data).then(resp => {
-        this.loadingCtrl.dismiss();
-        this.getAddressData();
-      }, err => {
-        this.loadingCtrl.dismiss();
-      })
-      console.log(data);
-
+      if (data) {
+        this.loadingCtrl.onLoading();
+        this.addressService.createAddress(data).then(resp => {
+          this.loadingCtrl.dismiss();
+          this.getAddressData();
+        }, err => {
+          this.loadingCtrl.dismiss();
+        })
+      }
     });
     modal.present();
   }
